@@ -1,4 +1,6 @@
-package rudok.app.gui.swing.view;
+package rudok.gui.view;
+
+import rudok.gui.controller.ActionManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,13 +8,14 @@ import java.awt.*;
 public class MainFrame extends JFrame {
 
     private static MainFrame instance;
+    private ActionManager actionManager;
     private JMenuBar menu;
     private JToolBar toolBar;
 
     private MainFrame(){
 
     }
-    private void initialise(){}
+    private void initialise(){ actionManager = new ActionManager(); }
 
     private void initialiseGUI(){
         Toolkit kit=Toolkit.getDefaultToolkit();
@@ -38,8 +41,13 @@ public class MainFrame extends JFrame {
     {
         if (instance==null){
             instance = new MainFrame();
+            instance.initialise();
             instance.initialiseGUI();
         }
         return instance;
+    }
+
+    public ActionManager getActionManager() {
+        return actionManager;
     }
 }

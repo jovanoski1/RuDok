@@ -1,6 +1,6 @@
-package rudok.app;
+package rudok;
 
-import rudok.app.gui.swing.view.MainFrame;
+import rudok.gui.view.MainFrame;
 
 public class AppCore {
     public static void main(String[] args) {
