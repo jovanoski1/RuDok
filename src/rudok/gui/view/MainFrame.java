@@ -33,6 +33,13 @@ public class MainFrame extends JFrame {
         toolBar = new Toolbar();
         add(toolBar, BorderLayout.NORTH);
 
+        JScrollPane scroll=new JScrollPane();
+        scroll.setMinimumSize(new Dimension(200,150));
+        JPanel panel=new JPanel();
+        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,panel);
+        split.setDividerLocation(250);
+        split.setOneTouchExpandable(true);
+        add(split,BorderLayout.CENTER);
 
     }
 
