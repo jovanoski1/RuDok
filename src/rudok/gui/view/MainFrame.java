@@ -1,6 +1,6 @@
 package rudok.gui.view;
 
-import rudok.gui.controller.ActionManager;
+import rudok.gui.actions.ActionManager;
 
 import javax.swing.*;
 import java.awt.*;

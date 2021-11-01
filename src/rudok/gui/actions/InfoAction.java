@@ -1,4 +1,4 @@
-package rudok.gui.controller;
+package rudok.gui.actions;
 
 import javax.swing.*;
 import java.awt.*;
