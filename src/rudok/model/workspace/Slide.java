@@ -8,6 +8,7 @@ public class Slide extends RuNode {
     public Slide(int redniBroj,RuNode parent)
     {
         redniBroj=redniBroj;
+        setIme("Slide "+redniBroj);
         if(parent instanceof Presentation)setParent(parent);
     }
 

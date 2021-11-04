@@ -12,7 +12,7 @@ import java.util.Enumeration;
 
 public class MyTreeNode extends DefaultMutableTreeNode {
 
-    RuNode node;
+    private RuNode node;
 
     public MyTreeNode(RuNode node){
         this.node=node;
@@ -54,7 +54,6 @@ public class MyTreeNode extends DefaultMutableTreeNode {
 
     @Override
     public void add(MutableTreeNode newChild) {
-        //TODO
         super.add(newChild);
     }
 

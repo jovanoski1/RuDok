@@ -1,10 +1,11 @@
 package rudok.model.tree;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class RuNodeComposite extends RuNode{
 
-    private List<RuNode> childern;
+    private List<RuNode> childern = new ArrayList<>();
 
     public RuNodeComposite()
     {

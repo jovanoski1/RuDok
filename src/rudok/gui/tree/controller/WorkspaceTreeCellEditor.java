@@ -1,5 +1,6 @@
 package rudok.gui.tree.controller;
 
+import rudok.gui.tree.model.MyTreeNode;
 import rudok.model.workspace.Presentation;
 import rudok.model.workspace.Project;
 import rudok.model.workspace.Slide;
@@ -40,12 +41,13 @@ public class WorkspaceTreeCellEditor extends DefaultTreeCellEditor implements Ac
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (stavka instanceof Project) {
-            ((Project) stavka).setIme(e.getActionCommand());
-        } else if (stavka instanceof Presentation) {
-            ((Presentation) stavka).setIme(e.getActionCommand());
-        }else if(stavka instanceof Slide){
-            ((Slide) stavka).setIme(e.getActionCommand());
+        if (((MyTreeNode)stavka).getNode() instanceof Project) {
+            ((MyTreeNode) stavka).getNode().setIme(e.getActionCommand());
+        } else if (((MyTreeNode)stavka).getNode() instanceof Presentation) {
+            ((MyTreeNode) stavka).getNode().setIme(e.getActionCommand());
+        }else if(((MyTreeNode)stavka).getNode() instanceof Slide){
+            ((MyTreeNode) stavka).getNode().setIme(e.getActionCommand());
         }
+        
     }
 }
