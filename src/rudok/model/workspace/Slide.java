@@ -1,6 +1,6 @@
-package rudok.gui.model.workspace;
+package rudok.model.workspace;
 
-import rudok.gui.model.tree.RuNode;
+import rudok.model.tree.RuNode;
 
 public class Slide extends RuNode {
     private int redniBroj;

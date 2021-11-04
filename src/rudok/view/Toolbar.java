@@ -1,4 +1,6 @@
-package rudok.gui.view;
+package rudok.view;
+
+import rudok.view.MainFrame;
 
 import javax.swing.*;
 

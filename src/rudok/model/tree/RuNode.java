@@ -1,4 +1,4 @@
-package rudok.gui.model.tree;
+package rudok.model.tree;
 
 public abstract class RuNode {
     private RuNode parent;

@@ -1,7 +1,7 @@
-package rudok.gui.model.workspace;
+package rudok.model.workspace;
 
-import rudok.gui.model.tree.RuNode;
-import rudok.gui.model.tree.RuNodeComposite;
+import rudok.model.tree.RuNode;
+import rudok.model.tree.RuNodeComposite;
 
 public class Workspace extends RuNodeComposite {
 
@@ -13,12 +13,12 @@ public class Workspace extends RuNodeComposite {
     @Override
     public void addChild(RuNode child) {
         if(!(child instanceof Project)) return;
-        super.addChild(child);
+        getChildern().add(child);
     }
 
     @Override
     public void removeChild(RuNode child) {
         if(!(child instanceof Project)) return;
-        super.removeChild(child);
+        getChildern().remove(child);
     }
 }

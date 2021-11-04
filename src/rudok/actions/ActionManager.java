@@ -1,4 +1,4 @@
-package rudok.gui.actions;
+package rudok.actions;
 
 public class ActionManager {
     private NewAction newAction;
