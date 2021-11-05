@@ -5,6 +5,7 @@ public class ActionManager {
     private InfoAction infoAction;
     private EditAutorAction editAutorAction;
     private EditImageAction editImageAction;
+    private DeleteAction deleteAction;
 
     public ActionManager(){initialiseActions();}
 
@@ -13,10 +14,19 @@ public class ActionManager {
         infoAction = new InfoAction();
         editAutorAction = new EditAutorAction();
         editImageAction = new EditImageAction();
+        deleteAction = new DeleteAction();
     }
 
     public EditImageAction getEditImageAction() {
         return editImageAction;
+    }
+
+    public DeleteAction getDeleteAction() {
+        return deleteAction;
+    }
+
+    public void setDeleteAction(DeleteAction deleteAction) {
+        this.deleteAction = deleteAction;
     }
 
     public void setEditImageAction(EditImageAction editImageAction) {

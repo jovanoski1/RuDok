@@ -29,6 +29,7 @@ public class NewAction extends AbstractRudokAction{
             Project project = new Project("Projekat "+(myTreeNode.getChildCount()+1),myTreeNode.getNode());
             MyTreeNode novi = new MyTreeNode(project);
             myTreeNode.add(novi);
+            MainFrame.getInstance().getMyTree().expandPath(MainFrame.getInstance().getMyTree().getSelectionPath());
             SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getMyTree());
         }
         else if(myTreeNode.getNode() instanceof Project)
@@ -36,6 +37,7 @@ public class NewAction extends AbstractRudokAction{
             Presentation presentation = new Presentation(myTreeNode.getNode(),"Mihail","Prezentacija "+(myTreeNode.getChildCount()+1),"");
             MyTreeNode novi = new MyTreeNode(presentation);
             myTreeNode.add(novi);
+            MainFrame.getInstance().getMyTree().expandPath(MainFrame.getInstance().getMyTree().getSelectionPath());
             SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getMyTree());
         }
         else if(myTreeNode.getNode() instanceof Presentation)
@@ -43,6 +45,7 @@ public class NewAction extends AbstractRudokAction{
             Slide slide = new Slide(myTreeNode.getChildCount()+1, myTreeNode.getNode());
             MyTreeNode novi = new MyTreeNode(slide);
             myTreeNode.add(novi);
+            MainFrame.getInstance().getMyTree().expandPath(MainFrame.getInstance().getMyTree().getSelectionPath());
             SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getMyTree());
         }
     }
