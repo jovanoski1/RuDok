@@ -1,5 +1,6 @@
 package rudok.gui.tree.view;
 
+import rudok.gui.tree.controller.WorkspaceMouseListener;
 import rudok.gui.tree.controller.WorkspaceTreeCellEditor;
 import rudok.gui.tree.controller.WorkspaceTreeCellRenderer;
 import rudok.gui.tree.controller.WorkspaceTreeSelectionListener;
@@ -12,6 +13,7 @@ public class MyTree extends JTree {
     public MyTree() {
 
         addTreeSelectionListener(new WorkspaceTreeSelectionListener());
+        addMouseListener(new WorkspaceMouseListener());
         setCellEditor(new WorkspaceTreeCellEditor(this,new DefaultTreeCellRenderer()));
         setCellRenderer(new WorkspaceTreeCellRenderer());
         setEditable(true);

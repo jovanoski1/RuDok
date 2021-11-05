@@ -4,6 +4,7 @@ import rudok.actions.ActionManager;
 import rudok.gui.tree.model.MyTreeNode;
 import rudok.gui.tree.model.WorkspaceTreeModel;
 import rudok.gui.tree.view.MyTree;
+import rudok.gui.tree.view.ProjectView;
 import rudok.model.workspace.Workspace;
 
 import javax.swing.*;
@@ -16,8 +17,8 @@ public class MainFrame extends JFrame {
     private JMenuBar menu;
     private JToolBar toolBar;
     private MyTree myTree;
-
-
+    private ProjectView projectView;
+    private JSplitPane split;
     private MainFrame(){
 
     }
@@ -32,6 +33,15 @@ public class MainFrame extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public ProjectView getProjectView() {
+        return projectView;
+    }
+
+    public void setProjectView(ProjectView projectView) {
+        this.projectView = projectView;
+        split.setRightComponent(projectView);
     }
 
     private void initialiseGUI(){
@@ -53,7 +63,7 @@ public class MainFrame extends JFrame {
         JScrollPane scroll=new JScrollPane(myTree);
         scroll.setMinimumSize(new Dimension(200,150));
         JPanel panel=new JPanel();
-        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,panel);
+        split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,panel);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
         add(split,BorderLayout.CENTER);

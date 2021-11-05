@@ -36,6 +36,11 @@ public class MyTreeNode extends DefaultMutableTreeNode {
     }
 
     @Override
+    public void remove(MutableTreeNode aChild) {
+        super.remove(aChild);
+    }
+
+    @Override
     public int getIndex(TreeNode aChild) {
         if(node instanceof RuNodeComposite)return super.getIndex(aChild);
         return 0;
