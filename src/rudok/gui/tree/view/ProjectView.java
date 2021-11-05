@@ -1,5 +1,7 @@
 package rudok.gui.tree.view;
 
+import rudok.model.tree.RuNode;
+import rudok.model.workspace.Presentation;
 import rudok.model.workspace.Project;
 import rudok.observer.ISubscriber;
 
@@ -8,7 +10,7 @@ import java.awt.*;
 
 public class ProjectView extends JPanel implements ISubscriber {
 
-    private Label name = new Label("");
+    private JLabel name = new JLabel("");
     Project model;
 
     public ProjectView(Project model){
@@ -25,6 +27,11 @@ public class ProjectView extends JPanel implements ISubscriber {
             String novoIme= (String)notification;
             model.setIme(novoIme);
             name.setText(novoIme);
+        }
+        else if(notification instanceof PresentationView)
+        {
+            this.add((PresentationView)notification);
+            this.revalidate();
         }
     }
 }
