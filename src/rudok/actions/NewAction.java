@@ -4,6 +4,7 @@ import com.sun.tools.javac.Main;
 import rudok.gui.tree.model.MyTreeNode;
 import rudok.gui.tree.view.PresentationView;
 import rudok.gui.tree.view.ProjectView;
+import rudok.gui.tree.view.SlideView;
 import rudok.model.workspace.Presentation;
 import rudok.model.workspace.Project;
 import rudok.model.workspace.Slide;
@@ -42,7 +43,7 @@ public class NewAction extends AbstractRudokAction{
             Presentation presentation = new Presentation(myTreeNode.getNode(),"Mihail","Prezentacija "+(myTreeNode.getChildCount()+1),"");
             MyTreeNode novi = new MyTreeNode(presentation);
             PresentationView presentationView = new PresentationView(presentation);
-            presentation.addSubscriber(presentationView); // dali treba ovo
+            //presentation.addSubscriber(presentationView); // dali treba ovo
             myTreeNode.add(novi);
             ((Project) myTreeNode.getNode()).addChild(presentation); /// da li ovo treba pokrece i notify
             //MainFrame.getInstance().getProjectView().update(presentationView);
@@ -55,6 +56,7 @@ public class NewAction extends AbstractRudokAction{
         {
             Slide slide = new Slide(myTreeNode.getChildCount()+1, myTreeNode.getNode());
             MyTreeNode novi = new MyTreeNode(slide);
+            SlideView slideView = new SlideView(slide);
             myTreeNode.add(novi);
             ((Presentation) myTreeNode.getNode()).addChild(slide); /// da li ovo treba
             MainFrame.getInstance().getMyTree().expandPath(MainFrame.getInstance().getMyTree().getSelectionPath());

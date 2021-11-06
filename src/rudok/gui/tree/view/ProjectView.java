@@ -13,9 +13,11 @@ public class ProjectView extends JPanel implements ISubscriber {
 
     private JLabel name = new JLabel("");
     private Project model;
-    private JTabbedPane tabbedPane = new JTabbedPane();
+    private JTabbedPane tabs = new JTabbedPane();
 
     public ProjectView(){
+
+        this.setLayout(new BorderLayout());
     }
 
     private void gui()
@@ -23,15 +25,16 @@ public class ProjectView extends JPanel implements ISubscriber {
         this.removeAll();
         name.setText(model.getIme());
         this.add(name,BorderLayout.NORTH);
-        tabbedPane.removeAll();
+        name.setBackground(Color.YELLOW);
+        tabs.removeAll();
         for(RuNode ruNode:model.getChildern())
         {
             if(ruNode instanceof Presentation){
                 Presentation presentation = (Presentation) ruNode;
-                tabbedPane.addTab(presentation.getIme(),(PresentationView)presentation.getSubscribers().get(0));
+                tabs.addTab(presentation.getIme(),(PresentationView)presentation.getSubscribers().get(0));
             }
         }
-        add(tabbedPane);
+        add(tabs,BorderLayout.CENTER);
     }
 
     public ProjectView(Project model){
@@ -50,7 +53,6 @@ public class ProjectView extends JPanel implements ISubscriber {
 
     @Override
     public void update(Object notification) {
-        System.out.println("USO");
         if(model==null)return;
         gui();
         SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());
