@@ -4,6 +4,7 @@ import rudok.model.workspace.Slide;
 import rudok.observer.ISubscriber;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class SlideView extends JPanel implements ISubscriber {
 
@@ -12,7 +13,9 @@ public class SlideView extends JPanel implements ISubscriber {
     public SlideView(Slide model){
         this.model=model;
         model.addSubscriber(this);
-        this.add(new JLabel(String.valueOf(model.getRedniBroj())));
+        this.setSize(100,100);
+        this.setBackground(Color.YELLOW);
+        this.add(new JLabel(model.getIme()));
     }
 
 

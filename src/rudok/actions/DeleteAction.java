@@ -3,7 +3,6 @@ package rudok.actions;
 import rudok.gui.tree.model.MyTreeNode;
 import rudok.model.tree.RuNode;
 import rudok.model.tree.RuNodeComposite;
-import rudok.model.workspace.Project;
 import rudok.model.workspace.Workspace;
 import rudok.view.MainFrame;
 
@@ -27,6 +26,7 @@ public class DeleteAction extends AbstractRudokAction{
         if(myTreeNode.getNode() instanceof Workspace)return;
         myTreeNode.removeFromParent();
 
+        ((RuNodeComposite) myTreeNode.getNode().getParent()).removeChild(myTreeNode.getNode());
         //((RuNodeComposite)myTreeNode.getNode().getParent()).removeChild((RuNodeComposite)myTreeNode.getNode());
         SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getMyTree());
     }

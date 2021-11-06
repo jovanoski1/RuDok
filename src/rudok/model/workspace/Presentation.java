@@ -46,6 +46,7 @@ public class Presentation extends RuNodeComposite {
     public void removeChild(RuNode child) {
         if(!(child instanceof Slide)) return;
         getChildern().remove(child);
+        notifySubscribers(new Object());
     }
 
     @Override
