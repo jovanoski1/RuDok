@@ -17,6 +17,7 @@ public abstract class RuNode implements IPublisher {
 
     public void setIme(String ime) {
         this.ime = ime;
+        this.notifySubscribers(new Object());
     }
 
     public RuNode getParent() {

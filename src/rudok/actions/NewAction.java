@@ -31,7 +31,7 @@ public class NewAction extends AbstractRudokAction{
         if(myTreeNode.getNode() instanceof Workspace){
             Project project = new Project("Projekat "+(myTreeNode.getChildCount()+1),myTreeNode.getNode());
             MyTreeNode novi = new MyTreeNode(project);
-            //project.addSubscriber(new ProjectView(project));
+            //novom projektu se doda jedini projectView
             project.addSubscriber(MainFrame.getInstance().getProjectView());
             myTreeNode.add(novi);
             ((Workspace) myTreeNode.getNode()).addChild(project); /// da li ovo treba
@@ -43,7 +43,7 @@ public class NewAction extends AbstractRudokAction{
             Presentation presentation = new Presentation(myTreeNode.getNode(),"Mihail","Prezentacija "+(myTreeNode.getChildCount()+1),"");
             MyTreeNode novi = new MyTreeNode(presentation);
             PresentationView presentationView = new PresentationView(presentation);
-            //presentation.addSubscriber(presentationView); // dali treba ovo
+            //presentation.addSubscriber(presentationView); // dali treba ovo - dodaje se u kontruktoru PresentationView-a
             myTreeNode.add(novi);
             ((Project) myTreeNode.getNode()).addChild(presentation); /// da li ovo treba pokrece i notify
             //MainFrame.getInstance().getProjectView().update(presentationView);

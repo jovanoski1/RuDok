@@ -24,7 +24,7 @@ public class WorkspaceMouseListener implements MouseListener {
 
                 Project project = (Project) ((MyTreeNode)selPath.getLastPathComponent()).getNode();
                 MainFrame.getInstance().getProjectView().setModel(project);
-                System.out.println(project.getChildern());
+                //System.out.println(project.getChildern());
 
 
                 //project.addSubscriber(MainFrame.getInstance().getProjectView());

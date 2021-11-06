@@ -17,7 +17,7 @@ public class PresentationView extends JPanel implements ISubscriber {
     public PresentationView(Presentation model){
         model.addSubscriber(this);
         this.model=model;
-
+        gui();
     }
     private void gui()
     {
