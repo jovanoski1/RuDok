@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
     private JMenuBar menu;
     private JToolBar toolBar;
     private MyTree myTree;
-    private ProjectView projectView;
+    private ProjectView projectView = new ProjectView();
     private JSplitPane split;
     private MainFrame(){
 
@@ -62,12 +62,15 @@ public class MainFrame extends JFrame {
 
         JScrollPane scroll=new JScrollPane(myTree);
         scroll.setMinimumSize(new Dimension(200,150));
-        JPanel panel=new JPanel();
-        split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,panel);
+        split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,this.getProjectView());
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
         add(split,BorderLayout.CENTER);
 
+    }
+
+    public JSplitPane getSplit() {
+        return split;
     }
 
     private void initialiseWorkspaceTree()

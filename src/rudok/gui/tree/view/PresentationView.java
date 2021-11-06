@@ -12,6 +12,7 @@ public class PresentationView extends JTabbedPane implements ISubscriber {
     private JLabel autor  = new JLabel("");
 
     public PresentationView(Presentation model){
+        model.addSubscriber(this);
         this.model=model;
         autor.setText(model.getIme());
         this.add(autor);
@@ -19,6 +20,5 @@ public class PresentationView extends JTabbedPane implements ISubscriber {
 
     @Override
     public void update(Object notification) {
-
     }
 }

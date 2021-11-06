@@ -30,7 +30,8 @@ public class NewAction extends AbstractRudokAction{
         if(myTreeNode.getNode() instanceof Workspace){
             Project project = new Project("Projekat "+(myTreeNode.getChildCount()+1),myTreeNode.getNode());
             MyTreeNode novi = new MyTreeNode(project);
-            project.addSubscriber(new ProjectView(project));
+            //project.addSubscriber(new ProjectView(project));
+            project.addSubscriber(MainFrame.getInstance().getProjectView());
             myTreeNode.add(novi);
             ((Workspace) myTreeNode.getNode()).addChild(project); /// da li ovo treba
             MainFrame.getInstance().getMyTree().expandPath(MainFrame.getInstance().getMyTree().getSelectionPath());
@@ -41,12 +42,14 @@ public class NewAction extends AbstractRudokAction{
             Presentation presentation = new Presentation(myTreeNode.getNode(),"Mihail","Prezentacija "+(myTreeNode.getChildCount()+1),"");
             MyTreeNode novi = new MyTreeNode(presentation);
             PresentationView presentationView = new PresentationView(presentation);
-            presentation.addSubscriber(presentationView);
+            presentation.addSubscriber(presentationView); // dali treba ovo
             myTreeNode.add(novi);
-            ((Project) myTreeNode.getNode()).addChild(presentation); /// da li ovo treba
-            myTreeNode.getNode().notifySubscribers(presentationView); //notify projekat da je dodata prezentacija
+            ((Project) myTreeNode.getNode()).addChild(presentation); /// da li ovo treba pokrece i notify
+            //MainFrame.getInstance().getProjectView().update(presentationView);
             MainFrame.getInstance().getMyTree().expandPath(MainFrame.getInstance().getMyTree().getSelectionPath());
             SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getMyTree());
+            //SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());
+
         }
         else if(myTreeNode.getNode() instanceof Presentation)
         {

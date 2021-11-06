@@ -20,12 +20,14 @@ public class Project extends RuNodeComposite{
     public void addChild(RuNode child) {
         if(!(child instanceof Presentation)) return;
         getChildern().add(child);
+        notifySubscribers(new Object());
     }
 
     @Override
     public void removeChild(RuNode child) {
         if(!(child instanceof Presentation)) return;
         getChildern().remove(child);
+        notifySubscribers(new Object());
     }
 
     @Override
