@@ -53,6 +53,10 @@ public class ProjectView extends JPanel implements ISubscriber {
         //this.model.addSubscriber(this);
     }
 
+    public void changeNameOfTab(int index,String name){
+        tabs.setTitleAt(index,name);
+    }
+
     @Override
     public void update(Object notification) {
         if(model==null)return;

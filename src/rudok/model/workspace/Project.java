@@ -29,6 +29,10 @@ public class Project extends RuNodeComposite{
         getChildern().remove(child);
         notifySubscribers(new Object());
     }
+    public int findChildIndex(Presentation p)
+    {
+        return getChildern().indexOf(p);
+    }
 
     @Override
     public void addSubscriber(ISubscriber sub) {

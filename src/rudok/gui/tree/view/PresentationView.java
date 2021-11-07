@@ -2,6 +2,7 @@ package rudok.gui.tree.view;
 
 import rudok.model.tree.RuNode;
 import rudok.model.workspace.Presentation;
+import rudok.model.workspace.Project;
 import rudok.model.workspace.Slide;
 import rudok.observer.ISubscriber;
 import rudok.view.MainFrame;
@@ -39,6 +40,16 @@ public class PresentationView extends JPanel implements ISubscriber {
 
     @Override
     public void update(Object notification) {
+        /**if(notification instanceof String){
+            model.getParent().notifySubscribers(notification); // rusi malo arhitekturu
+            System.out.println("YSI");
+            return;
+        }*/
+        // promena imena tako da se ne poziva iscrtavanje
+        if(notification instanceof String){
+            MainFrame.getInstance().getProjectView().changeNameOfTab(((Project)model.getParent()).findChildIndex(model),(String)notification);
+            return;
+        }
         gui();
         SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());
     }
