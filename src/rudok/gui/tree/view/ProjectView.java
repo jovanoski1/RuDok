@@ -17,24 +17,26 @@ public class ProjectView extends JPanel implements ISubscriber {
 
     public ProjectView(){
 
-        this.setLayout(new BorderLayout());
+        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
     }
 
     private void gui()
     {
         this.removeAll();
         name.setText(model.getIme());
-        this.add(name,BorderLayout.NORTH);
+        this.add(name);
         name.setBackground(Color.YELLOW);
         tabs.removeAll();
         for(RuNode ruNode:model.getChildern())
         {
             if(ruNode instanceof Presentation){
                 Presentation presentation = (Presentation) ruNode;
-                tabs.addTab(presentation.getIme(),(PresentationView)presentation.getSubscribers().get(0));
+                PresentationView presentationView = (PresentationView)presentation.getSubscribers().get(0);
+                JScrollPane jScrollPane = new JScrollPane(presentationView,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                tabs.addTab(presentation.getIme(),jScrollPane);
             }
         }
-        add(tabs,BorderLayout.CENTER);
+        this.add(tabs);
     }
 
     public ProjectView(Project model){

@@ -15,29 +15,26 @@ public class PresentationView extends JPanel implements ISubscriber {
 
     private Presentation model;
     private JLabel autor  = new JLabel("");
-    private JPanel slides = new JPanel();
 
     public PresentationView(Presentation model){
         model.addSubscriber(this);
         this.model=model;
-        this.setLayout(new BorderLayout());
-        slides.setLayout(new BoxLayout(slides,BoxLayout.PAGE_AXIS));
+        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         gui();
     }
     private void gui()
     {
         this.removeAll();
         autor.setText(model.getAutor());
-        this.add(autor,BorderLayout.NORTH);
-        slides.removeAll();
-        slides.setBackground(Color.GREEN);
+        this.add(autor);
+
         for(RuNode ruNode : model.getChildern())
         {
             if(ruNode instanceof Slide){
-                slides.add((SlideView)ruNode.getSubscribers().get(0));
+                this.add((SlideView)ruNode.getSubscribers().get(0));
+                this.add(Box.createVerticalStrut(15));
             }
         }
-        this.add(slides,BorderLayout.CENTER);
     }
 
     @Override

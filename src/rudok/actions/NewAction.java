@@ -40,7 +40,7 @@ public class NewAction extends AbstractRudokAction{
         }
         else if(myTreeNode.getNode() instanceof Project)
         {
-            Presentation presentation = new Presentation(myTreeNode.getNode(),"Mihail","Prezentacija "+(myTreeNode.getChildCount()+1),"");
+            Presentation presentation = new Presentation(myTreeNode.getNode(),"Mihail","Prezentacija "+(myTreeNode.getChildCount()+1),"src/rudok/images/pozadina.jpg");
             MyTreeNode novi = new MyTreeNode(presentation);
             PresentationView presentationView = new PresentationView(presentation);
             //presentation.addSubscriber(presentationView); // dali treba ovo - dodaje se u kontruktoru PresentationView-a
