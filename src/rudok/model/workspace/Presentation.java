@@ -25,6 +25,7 @@ public class Presentation extends RuNodeComposite {
 
     public void setAutor(String autor) {
         this.autor = autor;
+        notifySubscribers(new Object());
     }
 
     public String getSlika() {

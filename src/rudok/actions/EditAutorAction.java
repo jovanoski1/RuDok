@@ -1,5 +1,10 @@
 package rudok.actions;
 
+import rudok.gui.tree.model.MyTreeNode;
+import rudok.model.workspace.Presentation;
+import rudok.view.MainFrame;
+import rudok.view.popup.EditAutorDialog;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,11 +22,12 @@ public class EditAutorAction extends AbstractRudokAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JDialog dialog = new JDialog();
-        dialog.setTitle("Edit autor");
-        dialog.setLocationRelativeTo(dialog.getParent());
-        dialog.setSize(250,250);
-        dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        dialog.setVisible(true);
+        Object p= MainFrame.getInstance().getMyTree().getLastSelectedPathComponent();
+        if(p==null) return;
+        MyTreeNode myTreeNode = (MyTreeNode)p;
+        if(myTreeNode.getNode() instanceof Presentation){
+            EditAutorDialog editAutorDialog = new EditAutorDialog((Presentation) myTreeNode.getNode());
+
+        }
     }
 }
