@@ -33,6 +33,7 @@ public class Presentation extends RuNodeComposite {
 
     public void setSlika(String slika) {
         this.slika = slika;
+        notifySubscribers(new Object());
     }
 
     @Override

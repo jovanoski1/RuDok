@@ -22,7 +22,11 @@ public class SlideView extends JPanel implements ISubscriber {
         //this.add(new JLabel(model.getIme()));
         this.setMinimumSize(new Dimension(200,200));
         this.setPreferredSize(new Dimension(200,200));
-
+        model.getParent().addSubscriber(this);
+        gui();
+    }
+    private void gui(){
+        this.removeAll();
         JLabel pic = new JLabel(new ImageIcon(((Presentation)model.getParent()).getSlika()));
         this.add(pic);
     }
@@ -30,6 +34,6 @@ public class SlideView extends JPanel implements ISubscriber {
 
     @Override
     public void update(Object notification) {
-
+        gui();
     }
 }

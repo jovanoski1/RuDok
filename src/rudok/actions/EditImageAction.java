@@ -1,9 +1,15 @@
 package rudok.actions;
 
+import rudok.gui.tree.model.MyTreeNode;
+import rudok.model.workspace.Presentation;
+import rudok.view.MainFrame;
+
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
 public class EditImageAction extends AbstractRudokAction{
 
@@ -17,11 +23,18 @@ public class EditImageAction extends AbstractRudokAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JDialog dialog = new JDialog();
-        dialog.setTitle("Edit image");
-        dialog.setLocationRelativeTo(dialog.getParent());
-        dialog.setSize(250,250);
-        dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        dialog.setVisible(true);
+        Object p= MainFrame.getInstance().getMyTree().getLastSelectedPathComponent();
+        if(p==null) return;
+        MyTreeNode myTreeNode = (MyTreeNode)p;
+        if(myTreeNode.getNode() instanceof Presentation){
+            JFileChooser jFileChooser = new JFileChooser();
+            jFileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
+            jFileChooser.setAcceptAllFileFilterUsed(true);
+            jFileChooser.showOpenDialog(null);
+            File file = jFileChooser.getSelectedFile();
+            if(file  == null)return;
+            ((Presentation)myTreeNode.getNode()).setSlika(file.getPath());
+//            System.out.println(file.getPath());
+        }
     }
 }
