@@ -27,10 +27,28 @@ public class SlideView extends JPanel implements ISubscriber {
     }
     private void gui(){
         this.removeAll();
-        JLabel pic = new JLabel(new ImageIcon(((Presentation)model.getParent()).getSlika()));
-        this.add(pic);
+        SpringLayout springLayout = new SpringLayout();
+        Container cont = this;
+        cont.setLayout(springLayout);
+
+        JLabel label = new JLabel(String.valueOf(model.getRedniBroj()));
+        label.setForeground(Color.WHITE);
+        springLayout.putConstraint(SpringLayout.WEST, label, 20, SpringLayout.WEST, cont);
+        springLayout.putConstraint(SpringLayout.SOUTH, label, -10, SpringLayout.SOUTH, cont);
+        cont.add(label);
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        String url = ((Presentation)model.getParent()).getSlika();
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File(url));
+        } catch (IOException e) {
+        }
+        g.drawImage(img,0,0,getWidth(),getHeight(),null);
+    }
 
     @Override
     public void update(Object notification) {
