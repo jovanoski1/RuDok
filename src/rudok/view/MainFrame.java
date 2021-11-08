@@ -1,16 +1,18 @@
 package rudok.view;
 
 import rudok.actions.ActionManager;
+import rudok.errors.IError;
 import rudok.gui.tree.model.MyTreeNode;
 import rudok.gui.tree.model.WorkspaceTreeModel;
 import rudok.gui.tree.view.MyTree;
 import rudok.gui.tree.view.ProjectView;
 import rudok.model.workspace.Workspace;
+import rudok.observer.ISubscriber;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ISubscriber {
 
     private static MainFrame instance;
     private ActionManager actionManager;
@@ -95,5 +97,10 @@ public class MainFrame extends JFrame {
 
     public MyTree getMyTree() {
         return myTree;
+    }
+
+    @Override
+    public void update(Object notification) {
+        ((IError)notification).showError();
     }
 }

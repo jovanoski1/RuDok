@@ -1,5 +1,6 @@
 package rudok.actions;
 
+import rudok.errors.ErrorFactory;
 import rudok.gui.tree.model.MyTreeNode;
 import rudok.model.workspace.Presentation;
 import rudok.view.MainFrame;
@@ -27,7 +28,8 @@ public class EditAutorAction extends AbstractRudokAction{
         MyTreeNode myTreeNode = (MyTreeNode)p;
         if(myTreeNode.getNode() instanceof Presentation){
             EditAutorDialog editAutorDialog = new EditAutorDialog((Presentation) myTreeNode.getNode());
-
+            return;
         }
+        ErrorFactory.getInsance().createError("wrongSelected",MainFrame.getInstance());
     }
 }

@@ -1,5 +1,6 @@
 package rudok.actions;
 
+import rudok.errors.ErrorFactory;
 import rudok.gui.tree.model.MyTreeNode;
 import rudok.model.workspace.Presentation;
 import rudok.view.MainFrame;
@@ -35,6 +36,9 @@ public class EditImageAction extends AbstractRudokAction{
             if(file  == null)return;
             ((Presentation)myTreeNode.getNode()).setSlika(file.getPath());
 //            System.out.println(file.getPath());
+        }
+        else{
+            ErrorFactory.getInsance().createError("wrongSelected",MainFrame.getInstance());
         }
     }
 }

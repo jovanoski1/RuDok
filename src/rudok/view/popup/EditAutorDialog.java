@@ -1,5 +1,6 @@
 package rudok.view.popup;
 
+import rudok.errors.ErrorFactory;
 import rudok.model.workspace.Presentation;
 import rudok.view.MainFrame;
 
@@ -22,6 +23,7 @@ public class EditAutorDialog extends JDialog {
         this.setVisible(true);
         this.setLayout(new BorderLayout());
         this.setResizable(false);
+        this.setLocationRelativeTo(null);
 
     }
 
@@ -40,7 +42,8 @@ public class EditAutorDialog extends JDialog {
         okButton.addActionListener(e -> {
             String text= newAutor.getText();
             if(text.isBlank()){
-                return; //TODO error;
+                ErrorFactory.getInsance().createError("autorEmpty",this);
+                return;
             }
             prezentacija.setAutor(text);
             dispose();
