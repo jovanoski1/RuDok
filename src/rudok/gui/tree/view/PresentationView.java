@@ -23,6 +23,11 @@ public class PresentationView extends JPanel implements ISubscriber {
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         gui();
     }
+
+    public Presentation getModel() {
+        return model;
+    }
+
     private void gui()
     {
         this.removeAll();

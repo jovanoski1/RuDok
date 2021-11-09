@@ -70,6 +70,11 @@ public class Presentation extends RuNodeComposite {
     }
 
     @Override
+    public String toString() {
+        return getIme();
+    }
+
+    @Override
     public void notifySubscribers(Object notification) {
         if(notification == null || this.getSubscribers() == null || this.getSubscribers().isEmpty())
             return;

@@ -44,6 +44,11 @@ public class WorkspaceTreeCellEditor extends DefaultTreeCellEditor implements Ac
             ((MyTreeNode) stavka).getNode().setIme(e.getActionCommand());//moguce nepotrebno jer je menja i u notifySubscribers
             //((MyTreeNode) stavka).getNode().notifySubscribers(e.getActionCommand());
         } else if (((MyTreeNode)stavka).getNode() instanceof Presentation) {
+            Presentation p=(Presentation) ((MyTreeNode) stavka).getNode();
+            if(((Project)p.getParent()).containsName(e.getActionCommand())){
+                System.out.println("Postoji ime");//TODO ovo treba biti error
+                return;
+            }
             ((MyTreeNode) stavka).getNode().setIme(e.getActionCommand());
         }else if(((MyTreeNode)stavka).getNode() instanceof Slide){
             ((MyTreeNode) stavka).getNode().setIme(e.getActionCommand());

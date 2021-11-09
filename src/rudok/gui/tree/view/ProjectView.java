@@ -3,6 +3,7 @@ package rudok.gui.tree.view;
 import rudok.model.tree.RuNode;
 import rudok.model.workspace.Presentation;
 import rudok.model.workspace.Project;
+import rudok.model.workspace.dummyPresentation;
 import rudok.observer.ISubscriber;
 import rudok.view.MainFrame;
 
@@ -16,7 +17,6 @@ public class ProjectView extends JPanel implements ISubscriber {
     private JTabbedPane tabs = new JTabbedPane();
 
     public ProjectView(){
-
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
     }
 
@@ -60,6 +60,29 @@ public class ProjectView extends JPanel implements ISubscriber {
     @Override
     public void update(Object notification) {
         if(model==null)return;
+        if(notification instanceof dummyPresentation){
+            if(!((dummyPresentation) notification).getPresentation().getParent().equals(MainFrame.getInstance().getProjectView().getModel()))return;
+            if(((dummyPresentation) notification).getStatus().equals("added")){
+                Presentation presentation = ((dummyPresentation) notification).getPresentation();
+                PresentationView presentationView = (PresentationView)presentation.getSubscribers().get(0);
+                JScrollPane jScrollPane = new JScrollPane(presentationView,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                tabs.addTab(presentation.getIme(),jScrollPane);
+                return;
+            }
+            else{
+                /**
+                 not working if there are multiple presentations with the same name
+                 occurs due to creating presentation with parent.getChildCount + 1;
+                 */
+                Presentation presentation = ((dummyPresentation) notification).getPresentation();
+                for(int i=0;i<tabs.getTabCount();i++){
+                    JViewport viewport = ((JScrollPane)tabs.getComponentAt(i)).getViewport();
+                    PresentationView pt = (PresentationView)viewport.getView();
+                    if(pt.getModel().equals(presentation)) {tabs.removeTabAt(i);break;}
+                }
+                return;
+            }
+        }
         gui();
         SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());
     }
