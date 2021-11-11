@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.nio.file.Files;
 
 public class EditImageAction extends AbstractRudokAction{
 
@@ -30,12 +31,14 @@ public class EditImageAction extends AbstractRudokAction{
         if(myTreeNode.getNode() instanceof Presentation){
             JFileChooser jFileChooser = new JFileChooser();
             jFileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
-            jFileChooser.setAcceptAllFileFilterUsed(true);
-            jFileChooser.showOpenDialog(null);
+            jFileChooser.setAcceptAllFileFilterUsed(false);
+            jFileChooser.showOpenDialog(MainFrame.getInstance());
             File file = jFileChooser.getSelectedFile();
-            if(file  == null)return;
+            if(file  == null){
+                ErrorFactory.getInsance().createError("noImage",jFileChooser);
+                return;
+            }
             ((Presentation)myTreeNode.getNode()).setSlika(file.getPath());
-//            System.out.println(file.getPath());
         }
         else{
             ErrorFactory.getInsance().createError("wrongSelected",MainFrame.getInstance());

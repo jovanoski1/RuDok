@@ -23,6 +23,12 @@ public class ErrorFactory implements IPublisher {
         else if(type.equals("wrongSelected")){
             notifySubscribers(new WrongSelectedError(c));
         }
+        else if(type.equals("workspaceDelete")){
+            notifySubscribers(new WorkspaceDeleteError(c));
+        }
+        else if(type.equals("noImage")){
+            notifySubscribers(new NoImageSelectedError(c));
+        }
     }
 
 

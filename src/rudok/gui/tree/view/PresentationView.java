@@ -52,6 +52,8 @@ public class PresentationView extends JPanel implements ISubscriber {
         }*/
         // promena imena tako da se ne poziva iscrtavanje
         if(notification instanceof String){
+           //provera za otvoreni projekat
+            if(!MainFrame.getInstance().getProjectView().getModel().equals((Project)model.getParent()))return;
             MainFrame.getInstance().getProjectView().changeNameOfTab(((Project)model.getParent()).findChildIndex(model),(String)notification);
             return;
         }

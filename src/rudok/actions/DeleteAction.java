@@ -1,5 +1,6 @@
 package rudok.actions;
 
+import rudok.errors.ErrorFactory;
 import rudok.gui.tree.model.MyTreeNode;
 import rudok.model.tree.RuNode;
 import rudok.model.tree.RuNodeComposite;
@@ -24,7 +25,10 @@ public class DeleteAction extends AbstractRudokAction{
         Object p= MainFrame.getInstance().getMyTree().getLastSelectedPathComponent();
         if(p==null) return;
         MyTreeNode myTreeNode = (MyTreeNode)p;
-        if(myTreeNode.getNode() instanceof Workspace)return;
+        if(myTreeNode.getNode() instanceof Workspace){
+            ErrorFactory.getInsance().createError("workspaceDelete",MainFrame.getInstance());
+            return;
+        }
         if(myTreeNode.getNode().getParent() == null)return;
         myTreeNode.removeFromParent();
         ((RuNodeComposite) myTreeNode.getNode().getParent()).removeChild(myTreeNode.getNode());
