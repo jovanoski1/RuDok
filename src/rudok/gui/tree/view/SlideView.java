@@ -16,13 +16,14 @@ public class SlideView extends JPanel implements ISubscriber {
 
     private Slide model;
 
-    public SlideView(Slide model){
+    public SlideView(Slide model, Dimension dimension){
         this.model=model;
         model.addSubscriber(this);
         //this.add(new JLabel(model.getIme()));
-        this.setMinimumSize(new Dimension(200,200));
-        this.setPreferredSize(new Dimension(200,200));
-        model.getParent().addSubscriber(this);
+        this.setMinimumSize(dimension);//new Dimension(200,200));
+        this.setPreferredSize(dimension);//new Dimension(200,200));
+        this.setMaximumSize(dimension);
+        //model.getParent().addSubscriber(this);
         gui();
     }
     private void gui(){

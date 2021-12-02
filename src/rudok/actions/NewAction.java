@@ -12,6 +12,7 @@ import rudok.model.workspace.Workspace;
 import rudok.view.MainFrame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
@@ -57,7 +58,8 @@ public class NewAction extends AbstractRudokAction{
         {
             Slide slide = new Slide(myTreeNode.getChildCount()+1, myTreeNode.getNode());
             MyTreeNode novi = new MyTreeNode(slide);
-            SlideView slideView = new SlideView(slide);
+            SlideView slideView = new SlideView(slide, new Dimension(250,150));
+            SlideView previewSlideView = new SlideView(slide,new Dimension(100,100));
             myTreeNode.add(novi);
             ((Presentation) myTreeNode.getNode()).addChild(slide); /// da li ovo treba
             MainFrame.getInstance().getMyTree().expandPath(MainFrame.getInstance().getMyTree().getSelectionPath());

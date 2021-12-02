@@ -16,11 +16,30 @@ public class PresentationView extends JPanel implements ISubscriber {
 
     private Presentation model;
     private JLabel autor  = new JLabel("");
+    private JSplitPane splitPane;
+    private JScrollPane previewScrollPane;
+    private JScrollPane slideScrollPane;
+    private JPanel previewPanel = new JPanel();
+    private JPanel slidePanel = new JPanel();
 
     public PresentationView(Presentation model){
         model.addSubscriber(this);
         this.model=model;
-        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        //this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        this.setLayout(new BorderLayout());
+        this.add(autor,BorderLayout.NORTH);
+
+        slidePanel.setLayout(new BoxLayout(slidePanel,BoxLayout.Y_AXIS));
+        previewPanel.setLayout(new BoxLayout(previewPanel, BoxLayout.Y_AXIS));
+
+
+        slideScrollPane = new JScrollPane(slidePanel);
+        previewScrollPane = new JScrollPane(previewPanel);
+
+        splitPane=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,previewScrollPane,slideScrollPane);
+        splitPane.setDividerLocation(150);
+        splitPane.setOneTouchExpandable(false);
+        this.add(splitPane,BorderLayout.CENTER);
         gui();
     }
 
@@ -30,26 +49,25 @@ public class PresentationView extends JPanel implements ISubscriber {
 
     private void gui()
     {
-        this.removeAll();
+        //this.removeAll();
+        slidePanel.removeAll();
+        previewPanel.removeAll();
         autor.setText(model.getAutor());
-        this.add(autor);
-
         for(RuNode ruNode : model.getChildern())
         {
             if(ruNode instanceof Slide){
-                this.add((SlideView)ruNode.getSubscribers().get(0));
-                this.add(Box.createVerticalStrut(15));
+                slidePanel.add((SlideView)ruNode.getSubscribers().get(0));
+                slidePanel.add(Box.createVerticalStrut(15));
+
+                previewPanel.add((SlideView)ruNode.getSubscribers().get(1));
+                previewPanel.add(Box.createVerticalStrut(5));
             }
         }
+        SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());
     }
 
     @Override
     public void update(Object notification) {
-        /**if(notification instanceof String){
-            model.getParent().notifySubscribers(notification); // rusi malo arhitekturu
-            System.out.println("YSI");
-            return;
-        }*/
         // promena imena tako da se ne poziva iscrtavanje
         if(notification instanceof String){
            //provera za otvoreni projekat

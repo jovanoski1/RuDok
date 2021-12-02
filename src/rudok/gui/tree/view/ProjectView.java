@@ -32,8 +32,8 @@ public class ProjectView extends JPanel implements ISubscriber {
             if(ruNode instanceof Presentation){
                 Presentation presentation = (Presentation) ruNode;
                 PresentationView presentationView = (PresentationView)presentation.getSubscribers().get(0);
-                JScrollPane jScrollPane = new JScrollPane(presentationView,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-                tabs.addTab(presentation.getIme(),jScrollPane);
+                //JScrollPane jScrollPane = new JScrollPane(presentationView,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                tabs.addTab(presentation.getIme(),presentationView);
             }
         }
         this.add(tabs);
@@ -65,23 +65,23 @@ public class ProjectView extends JPanel implements ISubscriber {
             if(((dummyPresentation) notification).getStatus().equals("added")){
                 Presentation presentation = ((dummyPresentation) notification).getPresentation();
                 PresentationView presentationView = (PresentationView)presentation.getSubscribers().get(0);
-                JScrollPane jScrollPane = new JScrollPane(presentationView,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-                tabs.addTab(presentation.getIme(),jScrollPane);
+                ///JScrollPane jScrollPane = new JScrollPane(presentationView,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                tabs.addTab(presentation.getIme(),presentationView);
                 return;
             }
             else{
-                /**
-                 not working if there are multiple presentations with the same name
-                 occurs due to creating presentation with parent.getChildCount + 1;
-                 */
                 Presentation presentation = ((dummyPresentation) notification).getPresentation();
                 for(int i=0;i<tabs.getTabCount();i++){
-                    JViewport viewport = ((JScrollPane)tabs.getComponentAt(i)).getViewport();
-                    PresentationView pt = (PresentationView)viewport.getView();
+                    PresentationView pt = (PresentationView) tabs.getComponentAt(i);
+                    System.out.println(pt.getModel().getIme());
                     if(pt.getModel().equals(presentation)) {tabs.removeTabAt(i);break;}
                 }
                 return;
             }
+        }
+        if(notification instanceof String){
+            name.setText((String) notification);
+            return;
         }
         gui();
         SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());
