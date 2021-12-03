@@ -20,9 +20,14 @@ public class MainFrame extends JFrame implements ISubscriber {
     private StateManager stateManager;
     private JMenuBar menu;
     private JToolBar toolBar;
+    private JToolBar slideshowToolbar;
     private MyTree myTree;
     private ProjectView projectView = new ProjectView();
     private JSplitPane split;
+    private JPanel mainPanel = new JPanel();
+    private JPanel slideShowPanel = new JPanel();
+
+
     private MainFrame(){
 
     }
@@ -61,17 +66,21 @@ public class MainFrame extends JFrame implements ISubscriber {
 
         menu=new MyMenuBar();
         setJMenuBar(menu);
-
         toolBar = new Toolbar();
-        add(toolBar, BorderLayout.NORTH);
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(toolBar, BorderLayout.NORTH);
+
+        slideshowToolbar = new SlideShowToolbar();
+        slideShowPanel.setLayout(new BorderLayout());
+        slideShowPanel.add(slideshowToolbar, BorderLayout.NORTH);
 
         JScrollPane scroll=new JScrollPane(myTree);
         scroll.setMinimumSize(new Dimension(200,150));
         split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,this.getProjectView());
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
-        add(split,BorderLayout.CENTER);
-
+        mainPanel.add(split,BorderLayout.CENTER);
+        this.setContentPane(mainPanel);
     }
 
     public JSplitPane getSplit() {
@@ -117,7 +126,18 @@ public class MainFrame extends JFrame implements ISubscriber {
         changeMode();
     }
     public void changeMode(){
-        this.stateManager.getCurrenState().changeMode();
+        this.stateManager.getCurrentState().changeMode();
     }
 
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
+    public JPanel getSlideShowPanel() {
+        return slideShowPanel;
+    }
+
+    public JMenuBar getMenu() {
+        return menu;
+    }
 }

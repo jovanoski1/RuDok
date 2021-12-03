@@ -1,7 +1,7 @@
 package rudok.state;
 
 public class StateManager {
-    private State currenState;
+    private State currentState;
     private EditState editState;
     private SlideShowState slideShowState;
 
@@ -11,18 +11,18 @@ public class StateManager {
     private void initStates(){
         editState = new EditState();
         slideShowState = new SlideShowState();
-        currenState = editState;
+        currentState = editState;
     }
 
-    public State getCurrenState() {
-        return currenState;
+    public State getCurrentState() {
+        return currentState;
     }
 
     public void setEditState() {
-        currenState = editState;
+        currentState = editState;
     }
 
     public void setSlideShowState() {
-        currenState = slideShowState;
+        currentState = slideShowState;
     }
 }
