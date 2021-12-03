@@ -6,6 +6,8 @@ public class ActionManager {
     private EditAutorAction editAutorAction;
     private EditImageAction editImageAction;
     private DeleteAction deleteAction;
+    private EditModeAction editModeAction;
+    private SlideShowModeAction slideShowModeAction;
 
     public ActionManager(){initialiseActions();}
 
@@ -15,6 +17,8 @@ public class ActionManager {
         editAutorAction = new EditAutorAction();
         editImageAction = new EditImageAction();
         deleteAction = new DeleteAction();
+        slideShowModeAction = new SlideShowModeAction();
+        editModeAction = new EditModeAction();
     }
 
     public EditImageAction getEditImageAction() {
@@ -55,5 +59,21 @@ public class ActionManager {
 
     public void setInfoAction(InfoAction infoAction) {
         this.infoAction = infoAction;
+    }
+
+    public EditModeAction getEditModeAction() {
+        return editModeAction;
+    }
+
+    public void setEditModeAction(EditModeAction editModeAction) {
+        this.editModeAction = editModeAction;
+    }
+
+    public SlideShowModeAction getSlideShowModeAction() {
+        return slideShowModeAction;
+    }
+
+    public void setSlideShowModeAction(SlideShowModeAction slideShowModeAction) {
+        this.slideShowModeAction = slideShowModeAction;
     }
 }

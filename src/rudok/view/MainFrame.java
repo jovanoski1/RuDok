@@ -8,6 +8,7 @@ import rudok.gui.tree.view.MyTree;
 import rudok.gui.tree.view.ProjectView;
 import rudok.model.workspace.Workspace;
 import rudok.observer.ISubscriber;
+import rudok.state.StateManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     private static MainFrame instance;
     private ActionManager actionManager;
+    private StateManager stateManager;
     private JMenuBar menu;
     private JToolBar toolBar;
     private MyTree myTree;
@@ -26,6 +28,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     }
     private void initialise(){
         actionManager = new ActionManager();
+        stateManager = new StateManager();
         initialiseWorkspaceTree();
         initialiseGUI();
 
@@ -103,4 +106,18 @@ public class MainFrame extends JFrame implements ISubscriber {
     public void update(Object notification) {
         ((IError)notification).showError();
     }
+
+    public void startEditState()
+    {
+        this.stateManager.setEditState();
+        changeMode();
+    }
+    public void startSlideShowState(){
+        this.stateManager.setSlideShowState();
+        changeMode();
+    }
+    public void changeMode(){
+        this.stateManager.getCurrenState().changeMode();
+    }
+
 }
