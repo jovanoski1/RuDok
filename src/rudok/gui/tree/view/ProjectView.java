@@ -38,6 +38,10 @@ public class ProjectView extends JPanel implements ISubscriber {
         }
         this.add(tabs);
     }
+    public Presentation getPresentetion(){
+        if(tabs.getSelectedComponent()==null)return null;
+        return ((PresentationView) tabs.getSelectedComponent()).getModel();
+    }
 
     public ProjectView(Project model){
         this.model = model;
