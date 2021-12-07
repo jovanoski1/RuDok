@@ -3,7 +3,7 @@ package rudok.gui.tree.view;
 import rudok.model.tree.RuNode;
 import rudok.model.workspace.Presentation;
 import rudok.model.workspace.Project;
-import rudok.model.workspace.dummyPresentation;
+import rudok.model.workspace.dummyTreeNotification;
 import rudok.observer.ISubscriber;
 import rudok.view.MainFrame;
 
@@ -64,17 +64,17 @@ public class ProjectView extends JPanel implements ISubscriber {
     @Override
     public void update(Object notification) {
         if(model==null)return;
-        if(notification instanceof dummyPresentation){
-            if(!((dummyPresentation) notification).getPresentation().getParent().equals(MainFrame.getInstance().getProjectView().getModel()))return;
-            if(((dummyPresentation) notification).getStatus().equals("added")){
-                Presentation presentation = ((dummyPresentation) notification).getPresentation();
+        if(notification instanceof dummyTreeNotification){
+            if(!((dummyTreeNotification) notification).getTreeNode().getParent().equals(MainFrame.getInstance().getProjectView().getModel()))return;
+            if(((dummyTreeNotification) notification).getStatus().equals("added")){
+                Presentation presentation = (Presentation) ((dummyTreeNotification) notification).getTreeNode();
                 PresentationView presentationView = (PresentationView)presentation.getSubscribers().get(0);
                 ///JScrollPane jScrollPane = new JScrollPane(presentationView,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
                 tabs.addTab(presentation.getIme(),presentationView);
                 return;
             }
             else{
-                Presentation presentation = ((dummyPresentation) notification).getPresentation();
+                Presentation presentation = (Presentation)((dummyTreeNotification) notification).getTreeNode();
                 for(int i=0;i<tabs.getTabCount();i++){
                     PresentationView pt = (PresentationView) tabs.getComponentAt(i);
                     System.out.println(pt.getModel().getIme());

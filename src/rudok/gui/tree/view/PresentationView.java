@@ -4,14 +4,13 @@ import rudok.model.tree.RuNode;
 import rudok.model.workspace.Presentation;
 import rudok.model.workspace.Project;
 import rudok.model.workspace.Slide;
+import rudok.model.workspace.dummyTreeNotification;
 import rudok.observer.ISubscriber;
 import rudok.state.StateManager;
 import rudok.view.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PresentationView extends JPanel implements ISubscriber {
 
@@ -117,15 +116,26 @@ public class PresentationView extends JPanel implements ISubscriber {
             MainFrame.getInstance().getProjectView().changeNameOfTab(((Project)model.getParent()).findChildIndex(model),(String)notification);
             return;
         }
-        gui();
-        if(notification instanceof Slide){
-            //cards.add((SlideView)((Slide) notification).getSubscribers().get(2));
-            cards.remove((SlideView)((Slide) notification).getSubscribers().get(2));
-            System.out.println("USAO");
-            return;
+        //gui();
+        if(notification instanceof dummyTreeNotification){
+            if(((dummyTreeNotification) notification).getStatus().equals("added")){
+                cards.add((SlideView)(((dummyTreeNotification) notification).getTreeNode()).getSubscribers().get(2));
+
+                slidePanel.add((SlideView)(((dummyTreeNotification) notification).getTreeNode()).getSubscribers().get(0));
+                slidePanel.add(Box.createVerticalStrut(15));
+
+                previewPanel.add((SlideView)(((dummyTreeNotification) notification).getTreeNode()).getSubscribers().get(1));
+                previewPanel.add(Box.createVerticalStrut(5));
+            }
+            else if(((dummyTreeNotification) notification).getStatus().equals("deleted")){
+                cards.remove((SlideView)(((dummyTreeNotification) notification).getTreeNode()).getSubscribers().get(2));
+
+                slidePanel.remove((SlideView)(((dummyTreeNotification) notification).getTreeNode()).getSubscribers().get(0));
+                previewPanel.remove((SlideView)(((dummyTreeNotification) notification).getTreeNode()).getSubscribers().get(1));
+            }
+            //return;
         }
-        refreshSlideShow();
-        //SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());
+        SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());
     }
     public void startEditState()
     {

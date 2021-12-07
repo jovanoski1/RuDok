@@ -2,9 +2,6 @@ package rudok.model.workspace;
 
 import rudok.model.tree.RuNode;
 import rudok.model.tree.RuNodeComposite;
-import rudok.observer.ISubscriber;
-
-import java.util.ArrayList;
 
 public class Project extends RuNodeComposite{
 
@@ -18,7 +15,7 @@ public class Project extends RuNodeComposite{
     public void addChild(RuNode child) {
         if(!(child instanceof Presentation)) return;
         getChildern().add(child);
-        notifySubscribers(new dummyPresentation((Presentation) child,"added"));
+        notifySubscribers(new dummyTreeNotification(child,"added"));
     }
 
     public boolean containsName(String s){
@@ -32,7 +29,7 @@ public class Project extends RuNodeComposite{
     public void removeChild(RuNode child) {
         if(!(child instanceof Presentation)) return;
         getChildern().remove(child);
-        notifySubscribers(new dummyPresentation((Presentation) child,"deleted"));
+        notifySubscribers(new dummyTreeNotification(child,"deleted"));
     }
     public int findChildIndex(Presentation p)
     {
