@@ -17,6 +17,6 @@ public class SlideShowModeAction extends AbstractRudokAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        MainFrame.getInstance().startSlideShowState();
+        MainFrame.getInstance().getProjectView().getPresentetion().startSlideShowState();
     }
 }

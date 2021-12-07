@@ -60,7 +60,7 @@ public class NewAction extends AbstractRudokAction{
             MyTreeNode novi = new MyTreeNode(slide);
             SlideView slideView = new SlideView(slide, new Dimension(250,150));
             SlideView previewSlideView = new SlideView(slide,new Dimension(100,100));
-            SlideView slideshowSlideView = new SlideView(slide,new Dimension(400,250));
+            SlideView slideshowSlideView = new SlideView(slide,new Dimension(400,200));
             myTreeNode.add(novi);
             ((Presentation) myTreeNode.getNode()).addChild(slide); /// da li ovo treba
             MainFrame.getInstance().getMyTree().expandPath(MainFrame.getInstance().getMyTree().getSelectionPath());

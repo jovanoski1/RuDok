@@ -16,6 +16,6 @@ public class EditModeAction extends AbstractRudokAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        MainFrame.getInstance().startEditState();
+        MainFrame.getInstance().getProjectView().getPresentetion().startEditState();
     }
 }

@@ -5,6 +5,7 @@ import rudok.model.workspace.Presentation;
 import rudok.model.workspace.Project;
 import rudok.model.workspace.Slide;
 import rudok.observer.ISubscriber;
+import rudok.state.StateManager;
 import rudok.view.MainFrame;
 
 import javax.swing.*;
@@ -21,17 +22,36 @@ public class PresentationView extends JPanel implements ISubscriber {
     private JScrollPane slideScrollPane;
     private JPanel previewPanel = new JPanel();
     private JPanel slidePanel = new JPanel();
+    private JPanel slideShowPanel = new JPanel();
+    private JPanel editPanel = new JPanel();
+    private JToolBar presentationToolBar = new JToolBar();
+    private JToolBar slideShowToolBar = new JToolBar();
+    private JPanel cards = new JPanel();
+    private JPanel navigationPanel = new JPanel();
+    private JPanel authorAndToolbarPanel = new JPanel();
+    private StateManager stateManager;
 
     public PresentationView(Presentation model){
         model.addSubscriber(this);
         this.model=model;
-        //this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.setLayout(new BorderLayout());
-        this.add(autor,BorderLayout.NORTH);
+        editPanel.setLayout(new BorderLayout());
+        stateManager = new StateManager();
 
         slidePanel.setLayout(new BoxLayout(slidePanel,BoxLayout.Y_AXIS));
         previewPanel.setLayout(new BoxLayout(previewPanel, BoxLayout.Y_AXIS));
+        slideShowPanel.setLayout(new BorderLayout());
+        authorAndToolbarPanel.setLayout(new BorderLayout());
 
+        presentationToolBar.add(MainFrame.getInstance().getActionManager().getSlideShowModeAction());
+        slideShowToolBar.add(MainFrame.getInstance().getActionManager().getEditModeAction());
+
+        authorAndToolbarPanel.add(autor, BorderLayout.CENTER);
+        authorAndToolbarPanel.add(presentationToolBar, BorderLayout.NORTH);
+        editPanel.add(authorAndToolbarPanel, BorderLayout.NORTH);
+        slideShowPanel.add(slideShowToolBar, BorderLayout.NORTH);
+        slideShowPanel.add(cards,BorderLayout.CENTER);
+        slideShowPanel.add(navigationPanel, BorderLayout.SOUTH);
 
         slideScrollPane = new JScrollPane(slidePanel);
         previewScrollPane = new JScrollPane(previewPanel);
@@ -39,14 +59,36 @@ public class PresentationView extends JPanel implements ISubscriber {
         splitPane=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,previewScrollPane,slideScrollPane);
         splitPane.setDividerLocation(150);
         splitPane.setOneTouchExpandable(false);
-        this.add(splitPane,BorderLayout.CENTER);
+        editPanel.add(splitPane,BorderLayout.CENTER);
+        this.add(editPanel, BorderLayout.CENTER);
         gui();
+        refreshSlideShow();
     }
+    private void refreshSlideShow(){
+        cards.removeAll();
+        navigationPanel.removeAll();
+        JButton nextButton = new JButton("Next");
+        nextButton.addActionListener(e -> {
+            CardLayout cl = (CardLayout) (cards.getLayout());
+            if (model.getChildern().size()==0)return;
+            cl.next(cards);
+        });
+        JButton previousButton = new JButton("Previous");
+        previousButton.addActionListener(e -> {
+            CardLayout cl = (CardLayout) (cards.getLayout());
+            if (model.getChildern().size()==0)return;
+            cl.previous(cards);
+        });
+        navigationPanel.add(previousButton);
+        navigationPanel.add(nextButton);
 
-    public Presentation getModel() {
-        return model;
+        cards.setLayout(new CardLayout());
+        for(RuNode ruNode:model.getChildern()){
+            if(ruNode instanceof Slide){
+                cards.add((SlideView)ruNode.getSubscribers().get(2));
+            }
+        }
     }
-
     private void gui()
     {
         //this.removeAll();
@@ -76,6 +118,37 @@ public class PresentationView extends JPanel implements ISubscriber {
             return;
         }
         gui();
-        SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());
+        if(notification instanceof Slide){
+            //cards.add((SlideView)((Slide) notification).getSubscribers().get(2));
+            cards.remove((SlideView)((Slide) notification).getSubscribers().get(2));
+            System.out.println("USAO");
+            return;
+        }
+        refreshSlideShow();
+        //SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());
+    }
+    public void startEditState()
+    {
+        this.stateManager.setEditState();
+        changeMode();
+    }
+    public void startSlideShowState(){
+        this.stateManager.setSlideShowState();
+        changeMode();
+    }
+    public void changeMode(){
+        this.stateManager.getCurrentState().changeMode();
+    }
+
+    public JPanel getEditPanel() {
+        return editPanel;
+    }
+
+    public JPanel getSlideShowPanel() {
+        return slideShowPanel;
+    }
+
+    public Presentation getModel() {
+        return model;
     }
 }
