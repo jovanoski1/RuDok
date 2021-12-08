@@ -6,6 +6,7 @@ import rudok.gui.tree.model.MyTreeNode;
 import rudok.gui.tree.model.WorkspaceTreeModel;
 import rudok.gui.tree.view.MyTree;
 import rudok.gui.tree.view.ProjectView;
+import rudok.model.workspace.RuNodeType;
 import rudok.model.workspace.Workspace;
 import rudok.observer.ISubscriber;
 import rudok.state.StateManager;
@@ -80,7 +81,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private void initialiseWorkspaceTree()
     {
         myTree=new MyTree();
-        WorkspaceTreeModel workspaceModel = new WorkspaceTreeModel(new MyTreeNode(new Workspace("Workspace")));
+        WorkspaceTreeModel workspaceModel = new WorkspaceTreeModel(new MyTreeNode(new Workspace("Workspace"),RuNodeType.WORKSPACE));
         myTree.setModel(workspaceModel);
     }
 

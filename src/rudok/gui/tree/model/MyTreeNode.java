@@ -3,6 +3,7 @@ package rudok.gui.tree.model;
 import rudok.gui.tree.view.MyTree;
 import rudok.model.tree.RuNode;
 import rudok.model.tree.RuNodeComposite;
+import rudok.model.workspace.RuNodeType;
 import rudok.model.workspace.Slide;
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -13,9 +14,11 @@ import java.util.Enumeration;
 public class MyTreeNode extends DefaultMutableTreeNode {
 
     private RuNode node;
+    private RuNodeType type;
 
-    public MyTreeNode(RuNode node){
+    public MyTreeNode(RuNode node, RuNodeType type){
         this.node=node;
+        this.type=type;
     }
 
     @Override
@@ -73,5 +76,13 @@ public class MyTreeNode extends DefaultMutableTreeNode {
 
     public void setNode(RuNode node) {
         this.node = node;
+    }
+
+    public RuNodeType getType() {
+        return type;
+    }
+
+    public void setType(RuNodeType type) {
+        this.type = type;
     }
 }

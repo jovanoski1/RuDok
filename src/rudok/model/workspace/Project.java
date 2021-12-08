@@ -4,6 +4,7 @@ import rudok.model.tree.RuNode;
 import rudok.model.tree.RuNodeComposite;
 
 public class Project extends RuNodeComposite{
+    public Project(){}
 
     public Project(String ime,RuNode parent)
     {
