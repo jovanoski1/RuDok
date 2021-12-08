@@ -7,6 +7,7 @@ import rudok.model.workspace.Slide;
 import rudok.model.workspace.dummyTreeNotification;
 import rudok.observer.ISubscriber;
 import rudok.state.StateManager;
+import rudok.stateSlot.SlotStateManager;
 import rudok.view.MainFrame;
 
 import javax.swing.*;
@@ -29,6 +30,7 @@ public class PresentationView extends JPanel implements ISubscriber {
     private JPanel navigationPanel = new JPanel();
     private JPanel authorAndToolbarPanel = new JPanel();
     private StateManager stateManager;
+    private SlotStateManager slotStateManager;
 
     public PresentationView(Presentation model){
         model.addSubscriber(this);
@@ -36,6 +38,7 @@ public class PresentationView extends JPanel implements ISubscriber {
         this.setLayout(new BorderLayout());
         editPanel.setLayout(new BorderLayout());
         stateManager = new StateManager();
+        slotStateManager = new SlotStateManager();
 
         slidePanel.setLayout(new BoxLayout(slidePanel,BoxLayout.Y_AXIS));
         previewPanel.setLayout(new BoxLayout(previewPanel, BoxLayout.Y_AXIS));
@@ -43,6 +46,8 @@ public class PresentationView extends JPanel implements ISubscriber {
         authorAndToolbarPanel.setLayout(new BorderLayout());
 
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getSlideShowModeAction());
+        presentationToolBar.add(MainFrame.getInstance().getActionManager().getAddSlotModeAction());
+        presentationToolBar.add(MainFrame.getInstance().getActionManager().getDeleteSlotModeAction());
         slideShowToolBar.add(MainFrame.getInstance().getActionManager().getEditModeAction());
 
         authorAndToolbarPanel.add(autor, BorderLayout.CENTER);
@@ -149,6 +154,16 @@ public class PresentationView extends JPanel implements ISubscriber {
     public void changeMode(){
         this.stateManager.getCurrentState().changeMode();
     }
+
+    public void startAddSlotState(){
+        this.slotStateManager.setAddSlotState();
+        slotAction();
+    }
+    public void startDeleteSlotState(){
+        this.slotStateManager.setDeleteSlotState();
+        slotAction();
+    }
+    public void slotAction(){this.slotStateManager.getCurrentState().slotAction();}
 
     public JPanel getEditPanel() {
         return editPanel;

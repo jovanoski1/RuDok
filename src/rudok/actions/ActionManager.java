@@ -8,6 +8,8 @@ public class ActionManager {
     private DeleteAction deleteAction;
     private EditModeAction editModeAction;
     private SlideShowModeAction slideShowModeAction;
+    private AddSlotModeAction addSlotModeAction;
+    private DeleteSlotModeAction deleteSlotModeAction;
 
     public ActionManager(){initialiseActions();}
 
@@ -19,6 +21,24 @@ public class ActionManager {
         deleteAction = new DeleteAction();
         slideShowModeAction = new SlideShowModeAction();
         editModeAction = new EditModeAction();
+        addSlotModeAction = new AddSlotModeAction();
+        deleteSlotModeAction = new DeleteSlotModeAction();
+    }
+
+    public AddSlotModeAction getAddSlotModeAction() {
+        return addSlotModeAction;
+    }
+
+    public void setAddSlotModeAction(AddSlotModeAction addSlotModeAction) {
+        this.addSlotModeAction = addSlotModeAction;
+    }
+
+    public DeleteSlotModeAction getDeleteSlotModeAction() {
+        return deleteSlotModeAction;
+    }
+
+    public void setDeleteSlotModeAction(DeleteSlotModeAction deleteSlotModeAction) {
+        this.deleteSlotModeAction = deleteSlotModeAction;
     }
 
     public EditImageAction getEditImageAction() {
