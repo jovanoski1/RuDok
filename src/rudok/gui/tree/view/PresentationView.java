@@ -157,13 +157,13 @@ public class PresentationView extends JPanel implements ISubscriber {
 
     public void startAddSlotState(){
         this.slotStateManager.setAddSlotState();
-        slotAction();
     }
     public void startDeleteSlotState(){
         this.slotStateManager.setDeleteSlotState();
-        slotAction();
     }
-    public void slotAction(){this.slotStateManager.getCurrentState().slotAction();}
+    public void slotAction(Slide slide,int x,int y){
+        this.slotStateManager.getCurrentState().slotAction(slide,x,y);
+    }
 
     public JPanel getEditPanel() {
         return editPanel;

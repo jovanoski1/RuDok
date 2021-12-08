@@ -2,6 +2,8 @@ package rudok.gui.tree.view;
 
 import rudok.model.workspace.Presentation;
 import rudok.model.workspace.Slide;
+import rudok.model.workspace.Slot;
+import rudok.model.workspace.dummySlotNotification;
 import rudok.observer.ISubscriber;
 
 import javax.imageio.ImageIO;
@@ -11,18 +13,21 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SlideView extends JPanel implements ISubscriber {
 
     private Slide model;
+    private List<SlotView> slotViewList = new ArrayList<>();
 
     public SlideView(Slide model, Dimension dimension){
         this.model=model;
         model.addSubscriber(this);
         //this.add(new JLabel(model.getIme()));
-        this.setMinimumSize(dimension);//new Dimension(200,200));
+        //this.setMinimumSize(dimension);//new Dimension(200,200));
         this.setPreferredSize(dimension);//new Dimension(200,200));
-        this.setMaximumSize(dimension);
+        //this.setMaximumSize(dimension);
         //model.getParent().addSubscriber(this);
         gui();
     }
@@ -49,10 +54,38 @@ public class SlideView extends JPanel implements ISubscriber {
         } catch (IOException e) {
         }
         g.drawImage(img,0,0,getWidth(),getHeight(),null);
+
+        for(SlotView sv:slotViewList){
+            sv.paint((Graphics2D) g);
+        }
     }
 
     @Override
     public void update(Object notification) {
+        if(notification instanceof dummySlotNotification){
+            dummySlotNotification n = (dummySlotNotification) notification;
+            if(n.getStatus().equals("added")){
+                slotViewList.add(new SlotView(n.getSlot()));
+            }
+            else{
+                this.removeSlotView(n.getSlot());
+            }
+            repaint();
+        }
         gui();
+    }
+
+    private void removeSlotView(Slot s){
+        for(SlotView sv:slotViewList){
+            if(sv.getModel().equals(s)){
+                slotViewList.remove(sv);
+                break;
+            }
+        }
+    }
+
+
+    public Slide getModel() {
+        return model;
     }
 }
