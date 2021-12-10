@@ -14,9 +14,9 @@ public class SlotView implements ISubscriber {
         model.addSubscriber(this);
     }
 
-    public void paint(Graphics2D g){
+    public void paint(Graphics2D g, int dx,int dy){
         g.setPaint(model.getColor());
-        g.fillRect(model.getX(), model.getY(), model.getWidth(), model.getHeight());
+        g.fillRect((int) (model.getX()*model.getxScale()*dx), (int) (model.getY()* model.getyScale()*dy), (int) (model.getWidth()*model.getxScale()*dx), (int) (model.getHeight()* model.getyScale()*dy));
     }
     public boolean elementAt(int x,int y){
         return (x >= model.getX() && x <= model.getX() + model.getWidth()) && (y >= model.getY() && y < model.getY() + model.getHeight());

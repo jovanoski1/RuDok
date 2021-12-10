@@ -56,7 +56,7 @@ public class SlideView extends JPanel implements ISubscriber {
         g.drawImage(img,0,0,getWidth(),getHeight(),null);
 
         for(SlotView sv:slotViewList){
-            sv.paint((Graphics2D) g);
+            sv.paint((Graphics2D) g, this.getWidth(),this.getHeight());
         }
     }
 
@@ -84,6 +84,13 @@ public class SlideView extends JPanel implements ISubscriber {
         }
     }
 
+    public List<SlotView> getSlotViewList() {
+        return slotViewList;
+    }
+
+    public void setSlotViewList(List<SlotView> slotViewList) {
+        this.slotViewList = slotViewList;
+    }
 
     public Slide getModel() {
         return model;

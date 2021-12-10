@@ -16,17 +16,37 @@ public class Slot implements IPublisher {
     private int height;
     private Color color;
     private Stroke stroke;
+    private double xScale;
+    private double yScale;
 
-    public Slot(int x, int y) {
+    public Slot(int x, int y, double xScale,double yScale) {
         this.x = x;
         this.y = y;
         this.width=40;
         this.height=30;
+        this.xScale = xScale;
+        this.yScale = yScale;
         this.color = Color.RED;
     }
 
     public int getX() {
         return x;
+    }
+
+    public double getxScale() {
+        return xScale;
+    }
+
+    public void setxScale(double xScale) {
+        this.xScale = xScale;
+    }
+
+    public double getyScale() {
+        return yScale;
+    }
+
+    public void setyScale(double yScale) {
+        this.yScale = yScale;
     }
 
     public void setX(int x) {

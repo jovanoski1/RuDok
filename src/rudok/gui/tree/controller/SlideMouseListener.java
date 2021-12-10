@@ -17,7 +17,7 @@ public class SlideMouseListener implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         System.out.println(((SlideView)e.getComponent()).getModel().getIme());
-        Slide s = (Slide)((SlideView)e.getComponent()).getModel();
+        SlideView s = ((SlideView)e.getComponent());
         MainFrame.getInstance().getProjectView().getPresentetion().slotAction(s, e.getX(),e.getY());
     }
 
