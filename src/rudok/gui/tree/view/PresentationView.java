@@ -31,6 +31,8 @@ public class PresentationView extends JPanel implements ISubscriber {
     private JPanel authorAndToolbarPanel = new JPanel();
     private StateManager stateManager;
     private SlotStateManager slotStateManager;
+    private JButton colorChooser = new JButton("Pick color");
+    private Color slotColor= Color.RED;
 
     public PresentationView(Presentation model){
         model.addSubscriber(this);
@@ -39,6 +41,7 @@ public class PresentationView extends JPanel implements ISubscriber {
         editPanel.setLayout(new BorderLayout());
         stateManager = new StateManager();
         slotStateManager = new SlotStateManager();
+        colorChooser.setBackground(slotColor);
 
         slidePanel.setLayout(new BoxLayout(slidePanel,BoxLayout.Y_AXIS));
         previewPanel.setLayout(new BoxLayout(previewPanel, BoxLayout.Y_AXIS));
@@ -46,6 +49,8 @@ public class PresentationView extends JPanel implements ISubscriber {
         authorAndToolbarPanel.setLayout(new BorderLayout());
 
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getSlideShowModeAction());
+        presentationToolBar.add(new JSeparator(SwingConstants.VERTICAL));
+        presentationToolBar.add(colorChooser);
         presentationToolBar.add(new JSeparator(SwingConstants.VERTICAL));
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getAddSlotModeAction());
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getDeleteSlotModeAction());
@@ -69,6 +74,11 @@ public class PresentationView extends JPanel implements ISubscriber {
         this.add(editPanel, BorderLayout.CENTER);
         gui();
         refreshSlideShow();
+
+        colorChooser.addActionListener(e -> {
+            slotColor = JColorChooser.showDialog(null, "Choose a color", Color.RED);
+            colorChooser.setBackground(slotColor);
+        });
     }
     private void refreshSlideShow(){
         cards.removeAll();
@@ -171,6 +181,10 @@ public class PresentationView extends JPanel implements ISubscriber {
     }
     public void moveSlot(SlideView slideView,int x,int y){
         this.slotStateManager.getCurrentState().moveSlot(slideView,x,y);
+    }
+
+    public Color getSlotColor() {
+        return slotColor;
     }
 
     public JPanel getEditPanel() {

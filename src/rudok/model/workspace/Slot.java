@@ -19,14 +19,14 @@ public class Slot implements IPublisher {
     private double xScale;
     private double yScale;
 
-    public Slot(int x, int y, double xScale,double yScale) {
+    public Slot(int x, int y, double xScale,double yScale,Color color) {
         this.x = x;
         this.y = y;
         this.width=40;
         this.height=30;
         this.xScale = xScale;
         this.yScale = yScale;
-        this.color = Color.RED;
+        this.color = color;
     }
     public void setPosition(int x,int y){
         this.x=x;
@@ -94,7 +94,7 @@ public class Slot implements IPublisher {
         return stroke;
     }
 
-    public void setStroke(Stroke stroke) {
+    public void setStroke(BasicStroke stroke) {
         this.stroke = stroke;
     }
 
