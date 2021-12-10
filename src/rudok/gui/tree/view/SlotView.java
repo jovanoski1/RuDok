@@ -8,10 +8,12 @@ import java.awt.*;
 
 public class SlotView implements ISubscriber {
     Slot model;
+    SlideView slideView;
 
-    public SlotView(Slot model) {
+    public SlotView(Slot model,SlideView slideView) {
         this.model = model;
         model.addSubscriber(this);
+        this.slideView = slideView;
     }
 
     public void paint(Graphics2D g, int dx,int dy){
@@ -24,7 +26,7 @@ public class SlotView implements ISubscriber {
 
     @Override
     public void update(Object notification) {
-
+        slideView.repaint();
     }
 
     public Slot getModel() {

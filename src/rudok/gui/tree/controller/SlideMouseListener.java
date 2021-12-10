@@ -7,8 +7,9 @@ import rudok.view.MainFrame;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-public class SlideMouseListener implements MouseListener {
+public class SlideMouseListener implements MouseListener, MouseMotionListener {
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -34,5 +35,15 @@ public class SlideMouseListener implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        SlideView s = ((SlideView)e.getComponent());
+        MainFrame.getInstance().getProjectView().getPresentetion().moveSlot(s,e.getX(),e.getY());
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
     }
 }

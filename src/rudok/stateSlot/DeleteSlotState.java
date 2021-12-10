@@ -17,4 +17,9 @@ public class DeleteSlotState implements SlotState{
         }
         System.out.println("DELETE SLOT MODE");
     }
+
+    @Override
+    public void moveSlot(SlideView slideView,int x, int y) {
+
+    }
 }

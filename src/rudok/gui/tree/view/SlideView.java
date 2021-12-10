@@ -65,7 +65,7 @@ public class SlideView extends JPanel implements ISubscriber {
         if(notification instanceof dummySlotNotification){
             dummySlotNotification n = (dummySlotNotification) notification;
             if(n.getStatus().equals("added")){
-                slotViewList.add(new SlotView(n.getSlot()));
+                slotViewList.add(new SlotView(n.getSlot(),this));
             }
             else{
                 this.removeSlotView(n.getSlot());

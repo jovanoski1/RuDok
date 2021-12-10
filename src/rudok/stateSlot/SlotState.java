@@ -5,4 +5,5 @@ import rudok.model.workspace.Slide;
 
 public interface SlotState {
     void slotAction(SlideView slideView, int x, int y);
+    void moveSlot(SlideView slideView,int x,int y);
 }

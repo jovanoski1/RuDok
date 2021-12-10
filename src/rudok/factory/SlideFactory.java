@@ -17,7 +17,9 @@ public class SlideFactory extends AbstractNodeFactory{
     public RuNode createNode(MyTreeNode myTreeNode) {
         Slide slide = new Slide(myTreeNode.getChildCount()+1, myTreeNode.getNode());
         SlideView slideView = new SlideView(slide, new Dimension(250,150));
-        slideView.addMouseListener(new SlideMouseListener());
+        SlideMouseListener slideMouseListener = new SlideMouseListener();
+        slideView.addMouseListener(slideMouseListener);
+        slideView.addMouseMotionListener(slideMouseListener);
         SlideView previewSlideView = new SlideView(slide,new Dimension(100,100));
         SlideView slideshowSlideView = new SlideView(slide,new Dimension(400,200));
         ((Presentation) myTreeNode.getNode()).addChild(slide); /// da li ovo treba

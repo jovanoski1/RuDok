@@ -12,4 +12,9 @@ public class AddSlotState implements SlotState{
         slideView.getModel().addSlot(slot);
         System.out.println("ADD SLOT MODE");
     }
+
+    @Override
+    public void moveSlot(SlideView slideView,int x, int y) {
+
+    }
 }

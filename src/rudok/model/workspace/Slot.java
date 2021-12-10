@@ -28,6 +28,11 @@ public class Slot implements IPublisher {
         this.yScale = yScale;
         this.color = Color.RED;
     }
+    public void setPosition(int x,int y){
+        this.x=x;
+        this.y=y;
+        notifySubscribers(new Object());
+    }
 
     public int getX() {
         return x;
