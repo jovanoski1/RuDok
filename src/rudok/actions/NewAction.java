@@ -1,17 +1,12 @@
 package rudok.actions;
 
-import com.sun.tools.javac.Main;
 import rudok.factory.AbstractNodeFactory;
+import rudok.factory.NodeFactoryChooser;
 import rudok.gui.tree.model.MyTreeNode;
-import rudok.gui.tree.view.MyTree;
-import rudok.gui.tree.view.PresentationView;
-import rudok.gui.tree.view.ProjectView;
-import rudok.gui.tree.view.SlideView;
 import rudok.model.workspace.*;
 import rudok.view.MainFrame;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
@@ -29,7 +24,7 @@ public class NewAction extends AbstractRudokAction{
         if(p==null) return;
         MyTreeNode myTreeNode = (MyTreeNode)p;
 
-        AbstractNodeFactory f = AbstractNodeFactory.getFactory(myTreeNode.getType());
+        AbstractNodeFactory f = NodeFactoryChooser.getFactory(myTreeNode.getType());
         if (f==null)return;
         int ind=RuNodeType.valueOf(String.valueOf(myTreeNode.getType())).ordinal();
         MyTreeNode child = new MyTreeNode(f.getNewRuNode(myTreeNode),RuNodeType.values()[ind+1]);
