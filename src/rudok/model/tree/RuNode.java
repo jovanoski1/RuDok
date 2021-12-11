@@ -40,7 +40,7 @@ public abstract class RuNode implements IPublisher {
 
     @Override
     public void notifySubscribers(Object notification) {
-        if(notification == null || this.getSubscribers() == null || this.getSubscribers().isEmpty())
+        if(this.getSubscribers() == null || this.getSubscribers().isEmpty())
             return;
 
         for(ISubscriber listener : getSubscribers()){

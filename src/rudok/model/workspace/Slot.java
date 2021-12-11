@@ -31,7 +31,7 @@ public class Slot implements IPublisher {
     public void setPosition(int x,int y){
         this.x=x;
         this.y=y;
-        notifySubscribers(new Object());
+        notifySubscribers(null);
     }
 
     public int getX() {

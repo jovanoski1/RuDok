@@ -152,6 +152,7 @@ public class PresentationView extends JPanel implements ISubscriber {
             }
             //return;
         }
+        gui();
         SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());
     }
     public void startEditState()
