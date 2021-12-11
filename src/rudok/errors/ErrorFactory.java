@@ -16,18 +16,18 @@ public class ErrorFactory implements IPublisher {
 
     }
 
-    public void createError(String type, Component c){
+    public void createError(String type){
         if(type.equals("autorEmpty")){
-            notifySubscribers(new EmptyAuthorNameError(c));
+            notifySubscribers(new EmptyAuthorNameAError());
         }
         else if(type.equals("wrongSelected")){
-            notifySubscribers(new WrongSelectedError(c));
+            notifySubscribers(new WrongSelectedAError());
         }
         else if(type.equals("workspaceDelete")){
-            notifySubscribers(new WorkspaceDeleteError(c));
+            notifySubscribers(new WorkspaceDeleteAError());
         }
         else if(type.equals("noImage")){
-            notifySubscribers(new NoImageSelectedError(c));
+            notifySubscribers(new NoImageSelectedAError());
         }
     }
 

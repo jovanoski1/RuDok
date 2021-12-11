@@ -30,6 +30,6 @@ public class EditAutorAction extends AbstractRudokAction{
             EditAutorDialog editAutorDialog = new EditAutorDialog((Presentation) myTreeNode.getNode());
             return;
         }
-        ErrorFactory.getInsance().createError("wrongSelected",MainFrame.getInstance());
+        ErrorFactory.getInsance().createError("wrongSelected");
     }
 }

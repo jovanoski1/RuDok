@@ -35,13 +35,13 @@ public class EditImageAction extends AbstractRudokAction{
             jFileChooser.showOpenDialog(MainFrame.getInstance());
             File file = jFileChooser.getSelectedFile();
             if(file  == null){
-                ErrorFactory.getInsance().createError("noImage",jFileChooser);
+                ErrorFactory.getInsance().createError("noImage");
                 return;
             }
             ((Presentation)myTreeNode.getNode()).setSlika(file.getPath());
         }
         else{
-            ErrorFactory.getInsance().createError("wrongSelected",MainFrame.getInstance());
+            ErrorFactory.getInsance().createError("wrongSelected");
         }
     }
 }

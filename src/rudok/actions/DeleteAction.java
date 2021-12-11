@@ -26,7 +26,7 @@ public class DeleteAction extends AbstractRudokAction{
         if(p==null) return;
         MyTreeNode myTreeNode = (MyTreeNode)p;
         if(myTreeNode.getNode() instanceof Workspace){
-            ErrorFactory.getInsance().createError("workspaceDelete",MainFrame.getInstance());
+            ErrorFactory.getInsance().createError("workspaceDelete");
             return;
         }
         if(myTreeNode.getNode().getParent() == null)return;

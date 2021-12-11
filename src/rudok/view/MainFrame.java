@@ -1,7 +1,7 @@
 package rudok.view;
 
 import rudok.actions.ActionManager;
-import rudok.errors.IError;
+import rudok.errors.AError;
 import rudok.gui.tree.model.MyTreeNode;
 import rudok.gui.tree.model.WorkspaceTreeModel;
 import rudok.gui.tree.view.MyTree;
@@ -9,7 +9,6 @@ import rudok.gui.tree.view.ProjectView;
 import rudok.model.workspace.RuNodeType;
 import rudok.model.workspace.Workspace;
 import rudok.observer.ISubscriber;
-import rudok.state.StateManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -104,7 +103,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     @Override
     public void update(Object notification) {
-        ((IError)notification).showError();
+        JOptionPane.showMessageDialog(this,((AError)notification).showError(),"Error",JOptionPane.ERROR_MESSAGE);
     }
 
 }

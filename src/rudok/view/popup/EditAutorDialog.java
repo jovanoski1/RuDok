@@ -42,7 +42,7 @@ public class EditAutorDialog extends JDialog {
         okButton.addActionListener(e -> {
             String text= newAutor.getText();
             if(text.isBlank()){
-                ErrorFactory.getInsance().createError("autorEmpty",this);
+                ErrorFactory.getInsance().createError("autorEmpty");
                 return;
             }
             prezentacija.setAutor(text);
