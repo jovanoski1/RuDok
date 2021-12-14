@@ -31,7 +31,9 @@ public class PresentationView extends JPanel implements ISubscriber {
     private JPanel authorAndToolbarPanel = new JPanel();
     private StateManager stateManager;
     private SlotStateManager slotStateManager;
-    private JButton colorChooser = new JButton("Pick color");
+    private JButton colorChooser;
+    private JSpinner jSpinner = new JSpinner();
+    private JComboBox<String> jComboBox = new JComboBox<>();
     private Color slotColor= Color.RED;
 
     public PresentationView(Presentation model){
@@ -41,7 +43,18 @@ public class PresentationView extends JPanel implements ISubscriber {
         editPanel.setLayout(new BorderLayout());
         stateManager = new StateManager();
         slotStateManager = new SlotStateManager();
+        colorChooser = new JButton("Pick color");
         colorChooser.setBackground(slotColor);
+        jSpinner.setMaximumSize(new Dimension(40,20));
+        jSpinner.setPreferredSize(new Dimension(40,20));
+        jSpinner.setMinimumSize(new Dimension(40,20));
+        SpinnerModel spinnerModel = new SpinnerNumberModel(1, 1, 20, 1);
+        jSpinner.setModel(spinnerModel);
+        jComboBox.setMaximumSize(new Dimension(60,20));
+        jComboBox.setPreferredSize(new Dimension(60,20));
+        jComboBox.setMinimumSize(new Dimension(60,20));
+        jComboBox.addItem("Full");
+        jComboBox.addItem("Dashed");
 
         slidePanel.setLayout(new BoxLayout(slidePanel,BoxLayout.Y_AXIS));
         previewPanel.setLayout(new BoxLayout(previewPanel, BoxLayout.Y_AXIS));
@@ -51,6 +64,8 @@ public class PresentationView extends JPanel implements ISubscriber {
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getSlideShowModeAction());
         presentationToolBar.add(new JSeparator(SwingConstants.VERTICAL));
         presentationToolBar.add(colorChooser);
+        presentationToolBar.add(jSpinner);
+        presentationToolBar.add(jComboBox);
         presentationToolBar.add(new JSeparator(SwingConstants.VERTICAL));
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getAddSlotModeAction());
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getDeleteSlotModeAction());
@@ -184,6 +199,14 @@ public class PresentationView extends JPanel implements ISubscriber {
     }
     public void moveSlot(SlideView slideView,int x,int y){
         this.slotStateManager.getCurrentState().moveSlot(slideView,x,y);
+    }
+
+    public JSpinner getjSpinner() {
+        return jSpinner;
+    }
+
+    public JComboBox<String> getjComboBox() {
+        return jComboBox;
     }
 
     public Color getSlotColor() {

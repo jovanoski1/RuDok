@@ -25,9 +25,9 @@ public class SlotView implements ISubscriber {
         else
             g.setPaint(model.getColor());
         g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
-        g.setStroke(new BasicStroke(5));
+        g.setStroke(model.getStroke());
         g.drawRect((int) (model.getX()*model.getxScale()*dx), (int) (model.getY()* model.getyScale()*dy), (int) (model.getWidth()*model.getxScale()*dx), (int) (model.getHeight()* model.getyScale()*dy));
-        g.fillRect((int) (model.getX()*model.getxScale()*dx), (int) (model.getY()* model.getyScale()*dy), (int) (model.getWidth()*model.getxScale()*dx), (int) (model.getHeight()* model.getyScale()*dy));
+        //g.fillRect((int) (model.getX()*model.getxScale()*dx), (int) (model.getY()* model.getyScale()*dy), (int) (model.getWidth()*model.getxScale()*dx), (int) (model.getHeight()* model.getyScale()*dy));
     }
     public boolean elementAt(int x,int y){
         return (x >= model.getX() && x <= model.getX() + model.getWidth()) && (y >= model.getY() && y < model.getY() + model.getHeight());
