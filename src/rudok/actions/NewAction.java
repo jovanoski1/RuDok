@@ -3,6 +3,7 @@ package rudok.actions;
 import rudok.factory.AbstractNodeFactory;
 import rudok.factory.NodeFactoryChooser;
 import rudok.gui.tree.model.MyTreeNode;
+import rudok.model.tree.RuNode;
 import rudok.model.workspace.*;
 import rudok.view.MainFrame;
 
@@ -23,10 +24,10 @@ public class NewAction extends AbstractRudokAction{
         Object p= MainFrame.getInstance().getMyTree().getLastSelectedPathComponent();
         if(p==null) return;
         MyTreeNode myTreeNode = (MyTreeNode)p;
-
         AbstractNodeFactory f = NodeFactoryChooser.getFactory(myTreeNode.getType());
         if (f==null)return;
         int ind=RuNodeType.valueOf(String.valueOf(myTreeNode.getType())).ordinal();
+        if(myTreeNode.getNode().getParent()==null && (myTreeNode.getParent() instanceof Workspace))return;
         MyTreeNode child = new MyTreeNode(f.getNewRuNode(myTreeNode),RuNodeType.values()[ind+1]);
         myTreeNode.add(child);
         MainFrame.getInstance().getMyTree().expandPath(MainFrame.getInstance().getMyTree().getSelectionPath());

@@ -54,6 +54,7 @@ public class PresentationView extends JPanel implements ISubscriber {
         presentationToolBar.add(new JSeparator(SwingConstants.VERTICAL));
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getAddSlotModeAction());
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getDeleteSlotModeAction());
+        presentationToolBar.add(MainFrame.getInstance().getActionManager().getSelectSlotAction());
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getMoveSlotAction());
         slideShowToolBar.add(MainFrame.getInstance().getActionManager().getEditModeAction());
 
@@ -177,6 +178,7 @@ public class PresentationView extends JPanel implements ISubscriber {
     public void startMoveSlotState(){
         this.slotStateManager.setMoveSlotState();
     }
+    public void startSelectSlotState(){ this.slotStateManager.setSelectSlotState();}
     public void slotAction(SlideView slideView,int x,int y){
         this.slotStateManager.getCurrentState().slotAction(slideView,x,y);
     }

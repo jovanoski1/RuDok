@@ -18,6 +18,7 @@ public class Slot implements IPublisher {
     private Stroke stroke;
     private double xScale;
     private double yScale;
+    private boolean isSelected;
 
     public Slot(int x, int y, double xScale,double yScale,Color color) {
         this.x = x;
@@ -31,6 +32,15 @@ public class Slot implements IPublisher {
     public void setPosition(int x,int y){
         this.x=x;
         this.y=y;
+        notifySubscribers(null);
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
         notifySubscribers(null);
     }
 
@@ -126,7 +136,7 @@ public class Slot implements IPublisher {
 
     @Override
     public void notifySubscribers(Object notification) {
-        if(notification == null || this.getSubscribers() == null || this.getSubscribers().isEmpty())
+        if(this.getSubscribers() == null || this.getSubscribers().isEmpty())
             return;
 
         for(ISubscriber listener : getSubscribers()){

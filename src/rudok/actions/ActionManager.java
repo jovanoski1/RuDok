@@ -11,10 +11,11 @@ public class ActionManager {
     private AddSlotModeAction addSlotModeAction;
     private DeleteSlotModeAction deleteSlotModeAction;
     private MoveSlotAction moveSlotAction;
+    private SelectSlotAction selectSlotAction;
 
     public ActionManager(){initialiseActions();}
 
-    private void initialiseActions(){
+    private void initialiseActions() {
         newAction = new NewAction();
         infoAction = new InfoAction();
         editAutorAction = new EditAutorAction();
@@ -25,6 +26,15 @@ public class ActionManager {
         addSlotModeAction = new AddSlotModeAction();
         deleteSlotModeAction = new DeleteSlotModeAction();
         moveSlotAction = new MoveSlotAction();
+        selectSlotAction = new SelectSlotAction();
+    }
+
+    public SelectSlotAction getSelectSlotAction() {
+        return selectSlotAction;
+    }
+
+    public void setSelectSlotAction(SelectSlotAction selectSlotAction) {
+        this.selectSlotAction = selectSlotAction;
     }
 
     public MoveSlotAction getMoveSlotAction() {

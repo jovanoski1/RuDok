@@ -3,6 +3,8 @@ package rudok.gui.tree.view;
 import rudok.model.workspace.Slot;
 import rudok.observer.IPublisher;
 import rudok.observer.ISubscriber;
+import rudok.stateSlot.SelectSlotState;
+import rudok.view.MainFrame;
 
 import java.awt.*;
 
@@ -17,7 +19,11 @@ public class SlotView implements ISubscriber {
     }
 
     public void paint(Graphics2D g, int dx,int dy){
-        g.setPaint(model.getColor());
+        if(model.isSelected()){
+            g.setPaint(Color.CYAN);
+        }
+        else
+            g.setPaint(model.getColor());
         g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
         g.setStroke(new BasicStroke(5));
         g.drawRect((int) (model.getX()*model.getxScale()*dx), (int) (model.getY()* model.getyScale()*dy), (int) (model.getWidth()*model.getxScale()*dx), (int) (model.getHeight()* model.getyScale()*dy));
