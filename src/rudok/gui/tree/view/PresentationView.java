@@ -39,9 +39,33 @@ public class PresentationView extends JPanel implements ISubscriber {
         model.addSubscriber(this);
         this.model=model;
         this.setLayout(new BorderLayout());
-        editPanel.setLayout(new BorderLayout());
+
         stateManager = new StateManager();
         slotStateManager = new SlotStateManager();
+
+        initEditStatePanel();
+        initSlideShowStatePanel();
+        initControllers();
+
+        this.add(editPanel, BorderLayout.CENTER);
+
+        gui();
+        refreshSlideShow();
+    }
+    private void initSlideShowStatePanel(){
+        slideShowPanel.setLayout(new BorderLayout());
+        slideShowToolBar.add(MainFrame.getInstance().getActionManager().getEditModeAction());
+        slideShowPanel.add(slideShowToolBar, BorderLayout.NORTH);
+        slideShowPanel.add(cards,BorderLayout.CENTER);
+        slideShowPanel.add(navigationPanel, BorderLayout.SOUTH);
+    }
+    private void initEditStatePanel(){
+        editPanel.setLayout(new BorderLayout());
+        slidePanel.setLayout(new BoxLayout(slidePanel,BoxLayout.Y_AXIS));
+        previewPanel.setLayout(new BoxLayout(previewPanel, BoxLayout.Y_AXIS));
+        authorAndToolbarPanel.setLayout(new BorderLayout()); // panel for toolbar and authon label
+
+        // init components for properties for adding slots
         colorChooser = new JButton("Pick color");
         colorChooser.setBackground(Color.RED);
         jSpinner.setMaximumSize(new Dimension(40,20));
@@ -55,11 +79,7 @@ public class PresentationView extends JPanel implements ISubscriber {
         jComboBox.addItem("Full");
         jComboBox.addItem("Dashed");
 
-        slidePanel.setLayout(new BoxLayout(slidePanel,BoxLayout.Y_AXIS));
-        previewPanel.setLayout(new BoxLayout(previewPanel, BoxLayout.Y_AXIS));
-        slideShowPanel.setLayout(new BorderLayout());
-        authorAndToolbarPanel.setLayout(new BorderLayout());
-
+        // add actions to presentation toolbar
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getSlideShowModeAction());
         presentationToolBar.add(new JSeparator(SwingConstants.VERTICAL));
         presentationToolBar.add(colorChooser);
@@ -70,14 +90,9 @@ public class PresentationView extends JPanel implements ISubscriber {
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getDeleteSlotModeAction());
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getSelectSlotAction());
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getMoveSlotAction());
-        slideShowToolBar.add(MainFrame.getInstance().getActionManager().getEditModeAction());
 
         authorAndToolbarPanel.add(autor, BorderLayout.CENTER);
         authorAndToolbarPanel.add(presentationToolBar, BorderLayout.NORTH);
-        editPanel.add(authorAndToolbarPanel, BorderLayout.NORTH);
-        slideShowPanel.add(slideShowToolBar, BorderLayout.NORTH);
-        slideShowPanel.add(cards,BorderLayout.CENTER);
-        slideShowPanel.add(navigationPanel, BorderLayout.SOUTH);
 
         slideScrollPane = new JScrollPane(slidePanel);
         previewScrollPane = new JScrollPane(previewPanel);
@@ -85,11 +100,11 @@ public class PresentationView extends JPanel implements ISubscriber {
         splitPane=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,previewScrollPane,slideScrollPane);
         splitPane.setDividerLocation(150);
         splitPane.setOneTouchExpandable(false);
-        editPanel.add(splitPane,BorderLayout.CENTER);
-        this.add(editPanel, BorderLayout.CENTER);
-        gui();
-        refreshSlideShow();
 
+        editPanel.add(authorAndToolbarPanel, BorderLayout.NORTH);
+        editPanel.add(splitPane,BorderLayout.CENTER);
+    }
+    private void initControllers(){
         colorChooser.addActionListener(e -> {
             Color slotColor = JColorChooser.showDialog(null, "Choose a color", Color.RED);
             colorChooser.setBackground(slotColor);
