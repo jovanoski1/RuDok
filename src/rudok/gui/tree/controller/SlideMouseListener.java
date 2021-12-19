@@ -1,8 +1,6 @@
 package rudok.gui.tree.controller;
 
 import rudok.gui.tree.view.SlideView;
-import rudok.model.workspace.Slide;
-import rudok.model.workspace.Slot;
 import rudok.view.MainFrame;
 
 import java.awt.event.MouseEvent;

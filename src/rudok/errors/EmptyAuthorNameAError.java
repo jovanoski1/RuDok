@@ -1,7 +1,5 @@
 package rudok.errors;
 
-import java.awt.*;
-
 public class EmptyAuthorNameAError extends AError {
 
     @Override

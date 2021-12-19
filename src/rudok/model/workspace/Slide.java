@@ -1,8 +1,6 @@
 package rudok.model.workspace;
 
 import rudok.model.tree.RuNode;
-import rudok.observer.ISubscriber;
-
 import java.util.ArrayList;
 import java.util.List;
 

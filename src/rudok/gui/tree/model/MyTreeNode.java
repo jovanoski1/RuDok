@@ -1,11 +1,8 @@
 package rudok.gui.tree.model;
 
-import rudok.gui.tree.view.MyTree;
 import rudok.model.tree.RuNode;
 import rudok.model.tree.RuNodeComposite;
 import rudok.model.workspace.RuNodeType;
-import rudok.model.workspace.Slide;
-
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;

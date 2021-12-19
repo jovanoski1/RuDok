@@ -1,7 +1,6 @@
 package rudok.stateSlot;
 
 import rudok.gui.tree.view.SlideView;
-import rudok.model.workspace.Slide;
 import rudok.model.workspace.Slot;
 import rudok.view.MainFrame;
 

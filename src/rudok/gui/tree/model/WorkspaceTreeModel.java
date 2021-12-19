@@ -1,7 +1,5 @@
 package rudok.gui.tree.model;
 
-import rudok.model.workspace.Workspace;
-
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 

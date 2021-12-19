@@ -1,6 +1,5 @@
 package rudok.stateSlot;
 
-import rudok.state.State;
 
 public class SlotStateManager {
     private SlotState currentState;

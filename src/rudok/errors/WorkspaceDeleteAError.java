@@ -1,7 +1,5 @@
 package rudok.errors;
 
-import java.awt.*;
-
 public class WorkspaceDeleteAError extends AError {
     @Override
     public String showError() {

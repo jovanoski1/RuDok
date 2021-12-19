@@ -5,14 +5,12 @@ import rudok.model.workspace.Slide;
 import rudok.model.workspace.Slot;
 import rudok.model.workspace.dummySlotNotification;
 import rudok.observer.ISubscriber;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +22,7 @@ public class SlideView extends JPanel implements ISubscriber {
     public SlideView(Slide model, Dimension dimension){
         this.model=model;
         model.addSubscriber(this);
-        //this.add(new JLabel(model.getIme()));
-        //this.setMinimumSize(dimension);//new Dimension(200,200));
-        this.setPreferredSize(dimension);//new Dimension(200,200));
-        //this.setMaximumSize(dimension);
-        //model.getParent().addSubscriber(this);
+        this.setPreferredSize(dimension);
         gui();
     }
     private void gui(){

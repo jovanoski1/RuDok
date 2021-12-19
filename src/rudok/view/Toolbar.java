@@ -1,7 +1,5 @@
 package rudok.view;
 
-import rudok.view.MainFrame;
-
 import javax.swing.*;
 
 public class Toolbar extends JToolBar {

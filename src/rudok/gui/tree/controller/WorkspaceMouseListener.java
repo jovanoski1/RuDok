@@ -1,12 +1,8 @@
 package rudok.gui.tree.controller;
 
-import com.sun.tools.javac.Main;
 import rudok.gui.tree.model.MyTreeNode;
-import rudok.gui.tree.view.ProjectView;
 import rudok.model.workspace.Project;
 import rudok.view.MainFrame;
-
-import javax.swing.*;
 import javax.swing.tree.TreePath;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -24,12 +20,6 @@ public class WorkspaceMouseListener implements MouseListener {
 
                 Project project = (Project) ((MyTreeNode)selPath.getLastPathComponent()).getNode();
                 MainFrame.getInstance().getProjectView().setModel(project);
-                //System.out.println(project.getChildern());
-
-
-                //project.addSubscriber(MainFrame.getInstance().getProjectView());
-                //System.out.println(project.getSubscribers());
-                //project.notifySubscribers(MainFrame.getInstance().getProjectView());
             }
         }
     }

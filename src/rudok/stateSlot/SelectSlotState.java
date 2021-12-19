@@ -2,11 +2,6 @@ package rudok.stateSlot;
 
 import rudok.gui.tree.view.SlideView;
 import rudok.gui.tree.view.SlotView;
-import rudok.model.workspace.Slot;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SelectSlotState implements SlotState{
 

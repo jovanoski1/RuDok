@@ -4,14 +4,11 @@ import rudok.errors.ErrorFactory;
 import rudok.gui.tree.model.MyTreeNode;
 import rudok.model.workspace.Presentation;
 import rudok.view.MainFrame;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.nio.file.Files;
 
 public class EditImageAction extends AbstractRudokAction{
 

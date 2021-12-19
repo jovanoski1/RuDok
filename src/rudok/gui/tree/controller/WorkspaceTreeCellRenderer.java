@@ -1,12 +1,5 @@
 package rudok.gui.tree.controller;
 
-import rudok.gui.tree.model.MyTreeNode;
-import rudok.model.tree.RuNode;
-import rudok.model.workspace.Presentation;
-import rudok.model.workspace.Project;
-import rudok.model.workspace.Slide;
-import rudok.model.workspace.Workspace;
-
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;

@@ -2,8 +2,6 @@ package rudok.errors;
 
 import rudok.observer.IPublisher;
 import rudok.observer.ISubscriber;
-
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -6,7 +6,6 @@ import rudok.model.workspace.Project;
 import rudok.model.workspace.dummyTreeNotification;
 import rudok.observer.ISubscriber;
 import rudok.view.MainFrame;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -32,7 +31,6 @@ public class ProjectView extends JPanel implements ISubscriber {
             if(ruNode instanceof Presentation){
                 Presentation presentation = (Presentation) ruNode;
                 PresentationView presentationView = (PresentationView)presentation.getSubscribers().get(0);
-                //JScrollPane jScrollPane = new JScrollPane(presentationView,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
                 tabs.addTab(presentation.getIme(),presentationView);
             }
         }
@@ -54,7 +52,6 @@ public class ProjectView extends JPanel implements ISubscriber {
     public void setModel(Project model) {
         this.model = model;
         this.update(new Object());
-        //this.model.addSubscriber(this);
     }
 
     public void changeNameOfTab(int index,String name){
@@ -69,7 +66,6 @@ public class ProjectView extends JPanel implements ISubscriber {
             if(((dummyTreeNotification) notification).getStatus().equals("added")){
                 Presentation presentation = (Presentation) ((dummyTreeNotification) notification).getTreeNode();
                 PresentationView presentationView = (PresentationView)presentation.getSubscribers().get(0);
-                ///JScrollPane jScrollPane = new JScrollPane(presentationView,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
                 tabs.addTab(presentation.getIme(),presentationView);
                 return;
             }

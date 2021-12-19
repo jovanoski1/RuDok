@@ -5,11 +5,7 @@ import rudok.gui.tree.model.MyTreeNode;
 import rudok.gui.tree.view.SlideView;
 import rudok.model.tree.RuNode;
 import rudok.model.workspace.Presentation;
-import rudok.model.workspace.RuNodeType;
 import rudok.model.workspace.Slide;
-import rudok.view.MainFrame;
-
-import javax.swing.*;
 import java.awt.*;
 
 public class SlideFactory extends AbstractNodeFactory{

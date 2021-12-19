@@ -1,6 +1,5 @@
 package rudok.errors;
 
-import java.awt.*;
 
 public class NoImageSelectedAError extends AError {
 

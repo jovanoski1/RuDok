@@ -5,10 +5,6 @@ import rudok.gui.tree.view.PresentationView;
 import rudok.model.tree.RuNode;
 import rudok.model.workspace.Presentation;
 import rudok.model.workspace.Project;
-import rudok.model.workspace.RuNodeType;
-import rudok.view.MainFrame;
-
-import javax.swing.*;
 
 public class PresentationFactory extends AbstractNodeFactory{
     @Override
