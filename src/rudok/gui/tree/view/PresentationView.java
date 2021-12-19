@@ -34,7 +34,6 @@ public class PresentationView extends JPanel implements ISubscriber {
     private JButton colorChooser;
     private JSpinner jSpinner = new JSpinner();
     private JComboBox<String> jComboBox = new JComboBox<>();
-    private Color slotColor= Color.RED;
 
     public PresentationView(Presentation model){
         model.addSubscriber(this);
@@ -44,7 +43,7 @@ public class PresentationView extends JPanel implements ISubscriber {
         stateManager = new StateManager();
         slotStateManager = new SlotStateManager();
         colorChooser = new JButton("Pick color");
-        colorChooser.setBackground(slotColor);
+        colorChooser.setBackground(Color.RED);
         jSpinner.setMaximumSize(new Dimension(40,20));
         jSpinner.setPreferredSize(new Dimension(40,20));
         jSpinner.setMinimumSize(new Dimension(40,20));
@@ -92,8 +91,19 @@ public class PresentationView extends JPanel implements ISubscriber {
         refreshSlideShow();
 
         colorChooser.addActionListener(e -> {
-            slotColor = JColorChooser.showDialog(null, "Choose a color", Color.RED);
+            Color slotColor = JColorChooser.showDialog(null, "Choose a color", Color.RED);
             colorChooser.setBackground(slotColor);
+            slotStateManager.getAddSlotState().setColor(slotColor);
+        });
+        jSpinner.addChangeListener(e -> slotStateManager.getAddSlotState().setWidth((Integer) jSpinner.getValue()));
+        jComboBox.addActionListener(e -> {
+            float lineType;
+            if(jComboBox.getSelectedIndex() == 0)
+                lineType = 0.1f;
+            else{
+                lineType=10.0f;
+            }
+            slotStateManager.getAddSlotState().setLineType(lineType);
         });
     }
     private void refreshSlideShow(){
@@ -199,18 +209,6 @@ public class PresentationView extends JPanel implements ISubscriber {
     }
     public void moveSlot(SlideView slideView,int x,int y){
         this.slotStateManager.getCurrentState().moveSlot(slideView,x,y);
-    }
-
-    public JSpinner getjSpinner() {
-        return jSpinner;
-    }
-
-    public JComboBox<String> getjComboBox() {
-        return jComboBox;
-    }
-
-    public Color getSlotColor() {
-        return slotColor;
     }
 
     public JPanel getEditPanel() {

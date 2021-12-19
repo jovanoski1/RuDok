@@ -31,4 +31,8 @@ public class SlotStateManager {
     public void setDeleteSlotState() {
         currentState = deleteSlotState;
     }
+
+    public AddSlotState getAddSlotState() {
+        return addSlotState;
+    }
 }
