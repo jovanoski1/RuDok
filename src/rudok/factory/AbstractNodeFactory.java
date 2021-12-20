@@ -1,13 +1,12 @@
 package rudok.factory;
 
-import rudok.gui.tree.model.MyTreeNode;
 import rudok.model.tree.RuNode;
 
 public abstract class AbstractNodeFactory {
 
-    public RuNode getNewRuNode(MyTreeNode myTreeNode){
-        return createNode(myTreeNode);
+    public RuNode getNewRuNode(RuNode ruNode){
+        return createNode(ruNode);
     }
 
-    public abstract RuNode createNode(MyTreeNode myTreeNode);
+    public abstract RuNode createNode(RuNode ruNode);
 }
