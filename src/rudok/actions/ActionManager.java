@@ -12,6 +12,8 @@ public class ActionManager {
     private DeleteSlotModeAction deleteSlotModeAction;
     private MoveSlotAction moveSlotAction;
     private SelectSlotAction selectSlotAction;
+    private UndoAction undoAction;
+    private RedoAction redoAction;
 
     public ActionManager(){initialiseActions();}
 
@@ -27,6 +29,24 @@ public class ActionManager {
         deleteSlotModeAction = new DeleteSlotModeAction();
         moveSlotAction = new MoveSlotAction();
         selectSlotAction = new SelectSlotAction();
+        undoAction = new UndoAction();
+        redoAction = new RedoAction();
+    }
+
+    public RedoAction getRedoAction() {
+        return redoAction;
+    }
+
+    public void setRedoAction(RedoAction redoAction) {
+        this.redoAction = redoAction;
+    }
+
+    public UndoAction getUndoAction() {
+        return undoAction;
+    }
+
+    public void setUndoAction(UndoAction undoAction) {
+        this.undoAction = undoAction;
     }
 
     public SelectSlotAction getSelectSlotAction() {

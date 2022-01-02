@@ -12,7 +12,7 @@ public class Workspace extends RuNodeComposite {
 
     @Override
     public void addChild(RuNode child) {
-        if(!(child instanceof Project)) return;
+        if(!(child instanceof Project) || getChildern().contains(child)) return;
         getChildern().add(child);
     }
 

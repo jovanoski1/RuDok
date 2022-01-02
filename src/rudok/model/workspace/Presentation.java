@@ -36,7 +36,7 @@ public class Presentation extends RuNodeComposite {
 
     @Override
     public void addChild(RuNode child) {
-        if(!(child instanceof Slide)) return;
+        if(!(child instanceof Slide) || getChildern().contains(child)) return;
         getChildern().add(child);
         notifySubscribers(new dummyTreeNotification(child,"added"));
     }

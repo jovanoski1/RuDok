@@ -1,6 +1,7 @@
 package rudok.view;
 
 import rudok.actions.ActionManager;
+import rudok.commands.CommandManager;
 import rudok.errors.AError;
 import rudok.gui.tree.model.MyTreeNode;
 import rudok.gui.tree.model.WorkspaceTreeModel;
@@ -17,6 +18,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     private static MainFrame instance;
     private ActionManager actionManager;
+    private CommandManager commandManager;
     private JMenuBar menu;
     private JToolBar toolBar;
     private MyTree myTree;
@@ -29,6 +31,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     }
     private void initialise(){
         actionManager = new ActionManager();
+        commandManager = new CommandManager();
         initialiseWorkspaceTree();
         initialiseGUI();
 
@@ -106,4 +109,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         JOptionPane.showMessageDialog(this,((AError)notification).showError(),"Error",JOptionPane.ERROR_MESSAGE);
     }
 
+    public CommandManager getCommandManager() {
+        return commandManager;
+    }
 }

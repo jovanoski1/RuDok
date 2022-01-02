@@ -14,7 +14,7 @@ public class Project extends RuNodeComposite{
 
     @Override
     public void addChild(RuNode child) {
-        if(!(child instanceof Presentation)) return;
+        if(!(child instanceof Presentation) || getChildern().contains(child)) return;
         getChildern().add(child);
         notifySubscribers(new dummyTreeNotification(child,"added"));
     }

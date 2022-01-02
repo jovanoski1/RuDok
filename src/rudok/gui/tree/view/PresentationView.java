@@ -107,6 +107,7 @@ public class PresentationView extends JPanel implements ISubscriber {
     private void initControllers(){
         colorChooser.addActionListener(e -> {
             Color slotColor = JColorChooser.showDialog(null, "Choose a color", Color.RED);
+            if(slotColor == null)slotColor = Color.RED;
             colorChooser.setBackground(slotColor);
             slotStateManager.getAddSlotState().setColor(slotColor);
         });
@@ -170,7 +171,7 @@ public class PresentationView extends JPanel implements ISubscriber {
         // promena imena tako da se ne poziva iscrtavanje
         if(notification instanceof String){
            //provera za otvoreni projekat
-            if(!MainFrame.getInstance().getProjectView().getModel().equals((Project)model.getParent()))return;
+            if(MainFrame.getInstance().getProjectView().getModel()==null || !MainFrame.getInstance().getProjectView().getModel().equals((Project)model.getParent()))return;
             MainFrame.getInstance().getProjectView().changeNameOfTab(((Project)model.getParent()).findChildIndex(model),(String)notification);
             return;
         }
@@ -191,7 +192,8 @@ public class PresentationView extends JPanel implements ISubscriber {
                 slidePanel.remove((SlideView)(((dummyTreeNotification) notification).getTreeNode()).getSubscribers().get(0));
                 previewPanel.remove((SlideView)(((dummyTreeNotification) notification).getTreeNode()).getSubscribers().get(1));
             }
-            //return;
+            SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());
+            return;
         }
         gui();
         SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());

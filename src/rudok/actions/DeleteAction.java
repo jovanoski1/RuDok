@@ -1,5 +1,8 @@
 package rudok.actions;
 
+import jdk.swing.interop.SwingInterOpUtils;
+import rudok.commands.AddCommand;
+import rudok.commands.DeleteCommand;
 import rudok.errors.ErrorFactory;
 import rudok.gui.tree.model.MyTreeNode;
 import rudok.model.tree.RuNode;
@@ -30,6 +33,7 @@ public class DeleteAction extends AbstractRudokAction{
             return;
         }
         if(myTreeNode.getNode().getParent() == null)return;
+        MainFrame.getInstance().getCommandManager().addCommand(new DeleteCommand((MyTreeNode) myTreeNode.getParent(), myTreeNode,myTreeNode.getParent().getIndex(myTreeNode)));
         myTreeNode.removeFromParent();
         ((RuNodeComposite) myTreeNode.getNode().getParent()).removeChild(myTreeNode.getNode());
         if(myTreeNode.getNode().equals(MainFrame.getInstance().getProjectView().getModel())){

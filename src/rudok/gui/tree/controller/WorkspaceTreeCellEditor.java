@@ -1,9 +1,11 @@
 package rudok.gui.tree.controller;
 
+import rudok.commands.RenameCommand;
 import rudok.gui.tree.model.MyTreeNode;
 import rudok.model.workspace.Presentation;
 import rudok.model.workspace.Project;
 import rudok.model.workspace.Slide;
+import rudok.view.MainFrame;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellEditor;
@@ -41,6 +43,7 @@ public class WorkspaceTreeCellEditor extends DefaultTreeCellEditor implements Ac
 
     public void actionPerformed(ActionEvent e) {
         if (((MyTreeNode)stavka).getNode() instanceof Project) {
+            MainFrame.getInstance().getCommandManager().addCommand(new RenameCommand((MyTreeNode) stavka,((MyTreeNode) stavka).getNode().getIme(),e.getActionCommand()));
             ((MyTreeNode) stavka).getNode().setIme(e.getActionCommand());//moguce nepotrebno jer je menja i u notifySubscribers
         } else if (((MyTreeNode)stavka).getNode() instanceof Presentation) {
             Presentation p=(Presentation) ((MyTreeNode) stavka).getNode();
@@ -48,8 +51,10 @@ public class WorkspaceTreeCellEditor extends DefaultTreeCellEditor implements Ac
                 System.out.println("Postoji ime");//TODO ovo treba biti error
                 return;
             }
+            MainFrame.getInstance().getCommandManager().addCommand(new RenameCommand((MyTreeNode) stavka,((MyTreeNode) stavka).getNode().getIme(),e.getActionCommand()));
             ((MyTreeNode) stavka).getNode().setIme(e.getActionCommand());
         }else if(((MyTreeNode)stavka).getNode() instanceof Slide){
+            MainFrame.getInstance().getCommandManager().addCommand(new RenameCommand((MyTreeNode) stavka,((MyTreeNode) stavka).getNode().getIme(),e.getActionCommand()));
             ((MyTreeNode) stavka).getNode().setIme(e.getActionCommand());
         }
         
