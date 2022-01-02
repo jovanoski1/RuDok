@@ -1,10 +1,7 @@
 package rudok.gui.tree.view;
 
 import rudok.model.tree.RuNode;
-import rudok.model.workspace.Presentation;
-import rudok.model.workspace.Project;
-import rudok.model.workspace.Slide;
-import rudok.model.workspace.dummyTreeNotification;
+import rudok.model.workspace.*;
 import rudok.observer.ISubscriber;
 import rudok.state.StateManager;
 import rudok.stateSlot.SlotStateManager;
@@ -34,6 +31,8 @@ public class PresentationView extends JPanel implements ISubscriber {
     private JButton colorChooser;
     private JSpinner jSpinner = new JSpinner();
     private JComboBox<String> jComboBox = new JComboBox<>();
+    private JButton editSlotContentButton;
+    private JComboBox<SlotType> slotTypeComboBox = new JComboBox<>();
 
     public PresentationView(Presentation model){
         model.addSubscriber(this);
@@ -65,6 +64,8 @@ public class PresentationView extends JPanel implements ISubscriber {
         previewPanel.setLayout(new BoxLayout(previewPanel, BoxLayout.Y_AXIS));
         authorAndToolbarPanel.setLayout(new BorderLayout()); // panel for toolbar and authon label
 
+        editSlotContentButton = new JButton(new ImageIcon("src/rudok/actions/icons/edit.png"));
+        editSlotContentButton.setToolTipText("Edit slot content");
         // init components for properties for adding slots
         colorChooser = new JButton("Pick color");
         colorChooser.setBackground(Color.RED);
@@ -78,18 +79,29 @@ public class PresentationView extends JPanel implements ISubscriber {
         jComboBox.setMinimumSize(new Dimension(60,20));
         jComboBox.addItem("Full");
         jComboBox.addItem("Dashed");
+        slotTypeComboBox.setMaximumSize(new Dimension(60,20));
+        slotTypeComboBox.setPreferredSize(new Dimension(60,20));
+        slotTypeComboBox.setMinimumSize(new Dimension(60,20));
+        slotTypeComboBox.addItem(SlotType.TEXT);
+        slotTypeComboBox.addItem(SlotType.IMAGE);
+
 
         // add actions to presentation toolbar
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getSlideShowModeAction());
         presentationToolBar.add(new JSeparator(SwingConstants.VERTICAL));
         presentationToolBar.add(colorChooser);
+        presentationToolBar.add(Box.createHorizontalStrut(5));
         presentationToolBar.add(jSpinner);
+        presentationToolBar.add(Box.createHorizontalStrut(5));
         presentationToolBar.add(jComboBox);
+        presentationToolBar.add(Box.createHorizontalStrut(5));
+        presentationToolBar.add(slotTypeComboBox);
         presentationToolBar.add(new JSeparator(SwingConstants.VERTICAL));
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getAddSlotModeAction());
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getDeleteSlotModeAction());
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getSelectSlotAction());
         presentationToolBar.add(MainFrame.getInstance().getActionManager().getMoveSlotAction());
+        presentationToolBar.add(editSlotContentButton);
 
         authorAndToolbarPanel.add(autor, BorderLayout.CENTER);
         authorAndToolbarPanel.add(presentationToolBar, BorderLayout.NORTH);
@@ -120,6 +132,9 @@ public class PresentationView extends JPanel implements ISubscriber {
                 lineType=10.0f;
             }
             slotStateManager.getAddSlotState().setLineType(lineType);
+        });
+        slotTypeComboBox.addActionListener(e -> {
+            slotStateManager.getAddSlotState().setType((SlotType) slotTypeComboBox.getSelectedItem());
         });
     }
     private void refreshSlideShow(){

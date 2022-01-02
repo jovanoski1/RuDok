@@ -19,8 +19,9 @@ public class Slot implements IPublisher {
     private double xScale;
     private double yScale;
     private boolean isSelected;
+    private SlotType type;
 
-    public Slot(int x, int y, double xScale,double yScale,Color color) {
+    public Slot(int x, int y, double xScale,double yScale,Color color, SlotType type) {
         this.x = x;
         this.y = y;
         this.width=40;
@@ -28,6 +29,7 @@ public class Slot implements IPublisher {
         this.xScale = xScale;
         this.yScale = yScale;
         this.color = color;
+        this.type = type;
     }
     public void setPosition(int x,int y){
         this.x=x;

@@ -23,7 +23,7 @@ public class DeleteCommand extends AbstractCommand{
     public void doCommand() {
         parent.remove(node);
         ((RuNodeComposite) parent.getNode()).removeChild(node.getNode());
-
+        parent.getNode().setParent(null);
         if(node.getNode().equals(MainFrame.getInstance().getProjectView().getModel())){
             MainFrame.getInstance().getProjectView().removeAll();
             SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());
@@ -32,9 +32,9 @@ public class DeleteCommand extends AbstractCommand{
 
     @Override
     public void undoCommand() {
+        (node.getNode()).setParent(parent.getNode());
         parent.insert(node,index);
         ((RuNodeComposite) parent.getNode()).addChild(node.getNode());
-        (node.getNode()).setParent(parent.getNode());
 
     }
 }
