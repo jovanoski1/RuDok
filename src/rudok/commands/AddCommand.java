@@ -28,7 +28,7 @@ public class AddCommand extends AbstractCommand{
     public void undoCommand() {
         parent.remove(node);
         ((RuNodeComposite) parent.getNode()).removeChild(node.getNode());
-        parent.getNode().setParent(null);
+        node.getNode().setParent(null);
         if(node.getNode().equals(MainFrame.getInstance().getProjectView().getModel())){
             MainFrame.getInstance().getProjectView().removeAll();
             SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());

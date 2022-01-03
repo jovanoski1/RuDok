@@ -35,4 +35,8 @@ public class SlotStateManager {
     public AddSlotState getAddSlotState() {
         return addSlotState;
     }
+
+    public SelectSlotState getSelectSlotState() {
+        return selectSlotState;
+    }
 }

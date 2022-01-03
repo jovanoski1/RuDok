@@ -40,7 +40,7 @@ public class DeleteAction extends AbstractRudokAction{
             MainFrame.getInstance().getProjectView().removeAll();
             SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getSplit().getRightComponent());
         }
-        //MainFrame.getInstance().getMyTree().clearSelection();
+        MainFrame.getInstance().getMyTree().clearSelection();
         myTreeNode.getNode().setParent(null);
         SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getMyTree());
     }

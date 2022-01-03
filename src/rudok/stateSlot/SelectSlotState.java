@@ -28,11 +28,16 @@ public class SelectSlotState implements SlotState{
             for(SlotView sv: slideView.getSlotViewList()){
                 sv.getModel().setSelected(false);
             }
+            selectedSlot = null;
         }
     }
 
     @Override
     public void moveSlot(SlideView slideView, int x, int y) {
 
+    }
+
+    public Slot getSelectedSlot() {
+        return selectedSlot;
     }
 }

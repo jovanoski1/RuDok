@@ -6,6 +6,8 @@ import rudok.observer.ISubscriber;
 import rudok.state.StateManager;
 import rudok.stateSlot.SlotStateManager;
 import rudok.view.MainFrame;
+import rudok.view.popup.ImageEditor;
+import rudok.view.popup.TextEditorDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -135,6 +137,16 @@ public class PresentationView extends JPanel implements ISubscriber {
         });
         slotTypeComboBox.addActionListener(e -> {
             slotStateManager.getAddSlotState().setType((SlotType) slotTypeComboBox.getSelectedItem());
+        });
+        editSlotContentButton.addActionListener(e -> {
+            Slot selectedSlot = slotStateManager.getSelectSlotState().getSelectedSlot();
+            if(selectedSlot==null)return;
+            if(selectedSlot.getType().equals(SlotType.IMAGE)) {
+                ImageEditor imageEditorDialog = new ImageEditor(selectedSlot);
+            }
+            else{
+                TextEditorDialog textEditorDialog = new TextEditorDialog(selectedSlot);
+            }
         });
     }
     private void refreshSlideShow(){

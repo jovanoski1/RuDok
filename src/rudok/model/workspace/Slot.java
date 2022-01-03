@@ -46,6 +46,14 @@ public class Slot implements IPublisher {
         notifySubscribers(null);
     }
 
+    public SlotType getType() {
+        return type;
+    }
+
+    public void setType(SlotType type) {
+        this.type = type;
+    }
+
     public int getX() {
         return x;
     }
