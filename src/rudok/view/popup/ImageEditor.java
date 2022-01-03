@@ -1,5 +1,6 @@
 package rudok.view.popup;
 
+import rudok.gui.tree.view.SlotView;
 import rudok.model.workspace.Slot;
 import rudok.view.MainFrame;
 import javax.imageio.ImageIO;
@@ -11,9 +12,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImageEditor extends JDialog {
-    private Slot slot;
-    public ImageEditor(Slot slot) {
-        this.slot = slot;
+    private SlotView slotView;
+    File file;
+    ImagePanel imagePanel;
+    public ImageEditor(SlotView slotView) {
+        this.slotView = slotView;
         gui();
         this.setTitle("Image Editor");
         this.setLocationRelativeTo(MainFrame.getInstance());
@@ -29,10 +32,12 @@ public class ImageEditor extends JDialog {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
         panel.add(new JLabel("Image preview:"));
-        JPanel imagePreview = new JPanel();
-        imagePreview.setSize(new Dimension(150,150));
-        imagePreview.setMaximumSize(new Dimension(600,300));
-        panel.add(imagePreview);
+        //JPanel imagePreview = new JPanel();
+        imagePanel = new ImagePanel(slotView.getSlotHandler().readContent(slotView.getModel()));
+        imagePanel.setMinimumSize(new Dimension(600,300));
+        imagePanel.setPreferredSize(new Dimension(600,300));
+        imagePanel.setMaximumSize(new Dimension(600,300));
+        panel.add(imagePanel);
         this.add(panel,BorderLayout.NORTH);
         JPanel dole = new JPanel(new FlowLayout());
         JButton saveButton = new JButton("Save");
@@ -40,7 +45,14 @@ public class ImageEditor extends JDialog {
         dole.add(saveButton);
         dole.add(openButton);
         this.add(dole,BorderLayout.SOUTH);
+
+        String slotContent = slotView.getSlotHandler().readContent(slotView.getModel());
+        System.out.println(slotContent);
+
+
         saveButton.addActionListener(e -> {
+            if(file==null)return;
+            slotView.getSlotHandler().setContent(slotView.getModel(), file.getPath());
             dispose();
         });
         openButton.addActionListener(e -> {
@@ -48,17 +60,10 @@ public class ImageEditor extends JDialog {
             jFileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
             jFileChooser.setAcceptAllFileFilterUsed(false);
             jFileChooser.showOpenDialog(MainFrame.getInstance());
-            File file = jFileChooser.getSelectedFile();
+            file = jFileChooser.getSelectedFile();
             if(file==null)return;
-            BufferedImage myPicture = null;
-            try {
-                myPicture = ImageIO.read(file);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-            imagePreview.add(picLabel);
-            SwingUtilities.updateComponentTreeUI(imagePreview);
+            imagePanel.setUrl(file.getPath());
+            imagePanel.repaint();
         });
     }
 }

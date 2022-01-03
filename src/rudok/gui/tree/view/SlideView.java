@@ -1,10 +1,11 @@
 package rudok.gui.tree.view;
 
-import rudok.model.workspace.Presentation;
-import rudok.model.workspace.Slide;
-import rudok.model.workspace.Slot;
-import rudok.model.workspace.dummySlotNotification;
+import rudok.model.workspace.*;
 import rudok.observer.ISubscriber;
+import rudok.slotContentHandle.ISlotHandler;
+import rudok.slotContentHandle.ImageSlotHandler;
+import rudok.slotContentHandle.TextSlotHandler;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -17,10 +18,12 @@ import java.util.List;
 public class SlideView extends JPanel implements ISubscriber {
 
     private Slide model;
+    private SlideViewType type;
     private List<SlotView> slotViewList = new ArrayList<>();
 
-    public SlideView(Slide model, Dimension dimension){
+    public SlideView(Slide model, Dimension dimension ,SlideViewType type){
         this.model=model;
+        this.type = type;
         model.addSubscriber(this);
         this.setPreferredSize(dimension);
         gui();
@@ -59,7 +62,10 @@ public class SlideView extends JPanel implements ISubscriber {
         if(notification instanceof dummySlotNotification){
             dummySlotNotification n = (dummySlotNotification) notification;
             if(n.getStatus().equals("added")){
-                slotViewList.add(new SlotView(n.getSlot(),this));
+                ISlotHandler slotHandler;
+                if(n.getSlot().getType().equals(SlotType.TEXT))slotHandler = new TextSlotHandler();
+                else slotHandler = new ImageSlotHandler();
+                slotViewList.add(new SlotView(n.getSlot(),this, slotHandler));
             }
             else{
                 this.removeSlotView(n.getSlot());
@@ -88,5 +94,9 @@ public class SlideView extends JPanel implements ISubscriber {
 
     public Slide getModel() {
         return model;
+    }
+
+    public SlideViewType getType() {
+        return type;
     }
 }

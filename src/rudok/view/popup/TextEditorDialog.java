@@ -1,12 +1,14 @@
 package rudok.view.popup;
 
+import rudok.gui.tree.view.SlotView;
 import rudok.model.workspace.Slot;
 import rudok.view.MainFrame;
 import javax.swing.*;
+import javax.swing.text.*;
 import java.awt.*;
 
 public class TextEditorDialog extends JDialog {
-    private Slot slot;
+    private SlotView slotView;
 
     private JButton boldButton;
     private JButton italicButton;
@@ -14,9 +16,10 @@ public class TextEditorDialog extends JDialog {
     private JButton saveButton;
     private JTextPane textPane;
 
-    public TextEditorDialog(Slot slot) {
-        this.slot = slot;
+    public TextEditorDialog(SlotView slotview) {
+        this.slotView = slotview;
         gui();
+        controllers();
         this.setTitle("Text Editor");
         this.setLocationRelativeTo(MainFrame.getInstance());
         this.setSize(300,200);
@@ -48,7 +51,18 @@ public class TextEditorDialog extends JDialog {
         panel.add(jToolBar,BorderLayout.NORTH);
 
         textPane = new JTextPane();
+        textPane.setText(slotView.getSlotHandler().readContent(slotView.getModel()));
         panel.add(textPane);
         this.add(panel);
+    }
+
+    private void controllers(){
+        boldButton.addActionListener(new StyledEditorKit.BoldAction());
+        italicButton.addActionListener(new StyledEditorKit.ItalicAction());
+        underlineButton.addActionListener(new StyledEditorKit.UnderlineAction());
+        saveButton.addActionListener(e -> {
+            slotView.getSlotHandler().setContent(slotView.getModel(), textPane.getText());
+            this.dispose();
+        });
     }
 }

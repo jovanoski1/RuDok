@@ -139,9 +139,9 @@ public class PresentationView extends JPanel implements ISubscriber {
             slotStateManager.getAddSlotState().setType((SlotType) slotTypeComboBox.getSelectedItem());
         });
         editSlotContentButton.addActionListener(e -> {
-            Slot selectedSlot = slotStateManager.getSelectSlotState().getSelectedSlot();
+            SlotView selectedSlot = slotStateManager.getSelectSlotState().getSelectedSlot();
             if(selectedSlot==null)return;
-            if(selectedSlot.getType().equals(SlotType.IMAGE)) {
+            if(selectedSlot.getModel().getType().equals(SlotType.IMAGE)) {
                 ImageEditor imageEditorDialog = new ImageEditor(selectedSlot);
             }
             else{

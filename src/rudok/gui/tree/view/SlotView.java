@@ -2,17 +2,20 @@ package rudok.gui.tree.view;
 
 import rudok.model.workspace.Slot;
 import rudok.observer.ISubscriber;
+import rudok.slotContentHandle.ISlotHandler;
 
 import java.awt.*;
 
 public class SlotView implements ISubscriber {
     Slot model;
     SlideView slideView;
+    ISlotHandler slotHandler;
 
-    public SlotView(Slot model,SlideView slideView) {
+    public SlotView(Slot model,SlideView slideView, ISlotHandler slotHandler) {
         this.model = model;
         model.addSubscriber(this);
         this.slideView = slideView;
+        this.slotHandler = slotHandler;
     }
 
     public void paint(Graphics2D g, int dx,int dy){
@@ -24,6 +27,10 @@ public class SlotView implements ISubscriber {
         g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
         g.setStroke(model.getStroke());
         g.drawRect((int) (model.getX()*model.getxScale()*dx), (int) (model.getY()* model.getyScale()*dy), (int) (model.getWidth()*model.getxScale()*dx), (int) (model.getHeight()* model.getyScale()*dy));
+        if(slideView.getType().equals(SlideViewType.SLIDESHOW)){
+            g.setPaint(Color.white);
+            slotHandler.paint(model,g, dx, dy);
+        }
     }
     public boolean elementAt(int x,int y){
         return (x >= model.getX() && x <= model.getX() + model.getWidth()) && (y >= model.getY() && y < model.getY() + model.getHeight());
@@ -36,5 +43,9 @@ public class SlotView implements ISubscriber {
 
     public Slot getModel() {
         return model;
+    }
+
+    public ISlotHandler getSlotHandler() {
+        return slotHandler;
     }
 }

@@ -20,6 +20,7 @@ public class Slot implements IPublisher {
     private double yScale;
     private boolean isSelected;
     private SlotType type;
+    private String content;
 
     public Slot(int x, int y, double xScale,double yScale,Color color, SlotType type) {
         this.x = x;
@@ -30,10 +31,20 @@ public class Slot implements IPublisher {
         this.yScale = yScale;
         this.color = color;
         this.type = type;
+        content = "";
     }
     public void setPosition(int x,int y){
         this.x=x;
         this.y=y;
+        notifySubscribers(null);
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
         notifySubscribers(null);
     }
 

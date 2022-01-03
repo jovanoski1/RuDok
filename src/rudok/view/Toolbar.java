@@ -17,6 +17,8 @@ public class Toolbar extends JToolBar {
         add(MainFrame.getInstance().getActionManager().getEditImageAction());
         add(MainFrame.getInstance().getActionManager().getInfoAction());
 
+        MainFrame.getInstance().getActionManager().getRedoAction().setEnabled(false);
+        MainFrame.getInstance().getActionManager().getUndoAction().setEnabled(false);
     }
 
 }

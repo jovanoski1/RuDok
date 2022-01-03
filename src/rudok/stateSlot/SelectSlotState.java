@@ -5,7 +5,7 @@ import rudok.gui.tree.view.SlotView;
 import rudok.model.workspace.Slot;
 
 public class SelectSlotState implements SlotState{
-    Slot selectedSlot=null;
+    SlotView selectedSlot=null;
     @Override
     public void slotAction(SlideView slideView, int x, int y) {
         boolean someIsSelected=false;
@@ -17,8 +17,8 @@ public class SelectSlotState implements SlotState{
                 }
                 else{
                     sv.getModel().setSelected(true);
-                    if(selectedSlot != null)selectedSlot.setSelected(false);
-                    selectedSlot = sv.getModel();
+                    if(selectedSlot != null)selectedSlot.getModel().setSelected(false);
+                    selectedSlot = sv;
                 }
                 someIsSelected=true;
                 break;
@@ -37,7 +37,7 @@ public class SelectSlotState implements SlotState{
 
     }
 
-    public Slot getSelectedSlot() {
+    public SlotView getSelectedSlot() {
         return selectedSlot;
     }
 }
