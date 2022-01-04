@@ -19,7 +19,7 @@ public class SlotView implements ISubscriber {
     }
 
     public void paint(Graphics2D g, int dx,int dy){
-        if(model.isSelected()){
+        if(model.isSelected() && !slideView.getType().equals(SlideViewType.SLIDESHOW)){
             g.setPaint(Color.CYAN);
         }
         else
@@ -29,7 +29,7 @@ public class SlotView implements ISubscriber {
         g.drawRect((int) (model.getX()*model.getxScale()*dx), (int) (model.getY()* model.getyScale()*dy), (int) (model.getWidth()*model.getxScale()*dx), (int) (model.getHeight()* model.getyScale()*dy));
         if(slideView.getType().equals(SlideViewType.SLIDESHOW)){
             g.setPaint(Color.white);
-            slotHandler.paint(model,g, dx, dy);
+            slotHandler.paint(this,g, dx, dy);
         }
     }
     public boolean elementAt(int x,int y){
@@ -43,6 +43,10 @@ public class SlotView implements ISubscriber {
 
     public Slot getModel() {
         return model;
+    }
+
+    public SlideView getSlideView() {
+        return slideView;
     }
 
     public ISlotHandler getSlotHandler() {

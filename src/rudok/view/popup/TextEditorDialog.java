@@ -51,6 +51,7 @@ public class TextEditorDialog extends JDialog {
         panel.add(jToolBar,BorderLayout.NORTH);
 
         textPane = new JTextPane();
+        textPane.setContentType("text/html");
         textPane.setText(slotView.getSlotHandler().readContent(slotView.getModel()));
         panel.add(textPane);
         this.add(panel);

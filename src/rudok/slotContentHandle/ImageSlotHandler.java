@@ -1,5 +1,6 @@
 package rudok.slotContentHandle;
 
+import rudok.gui.tree.view.SlotView;
 import rudok.model.workspace.Slot;
 
 import javax.imageio.ImageIO;
@@ -20,11 +21,12 @@ public class ImageSlotHandler implements ISlotHandler{
     }
 
     @Override
-    public void paint(Slot slot, Graphics2D g, int dx,int dy) {
-        if(slot.getContent().equals(""))return;
+    public void paint(SlotView slotView, Graphics2D g, int dx, int dy) {
+        if(slotView.getModel().getContent().equals(""))return;
         try {
-            final BufferedImage image = ImageIO.read(new File(slot.getContent()));
-            g.drawImage(image,(int) (slot.getX()*slot.getxScale()*dx), (int) (slot.getY()* slot.getyScale()*dy), (int) (slot.getWidth()*slot.getxScale()*dx), (int) (slot.getHeight()* slot.getyScale()*dy),null);
+            final BufferedImage image = ImageIO.read(new File(slotView.getModel().getContent()));
+            g.drawImage(image,(int) (slotView.getModel().getX()*slotView.getModel().getxScale()*dx), (int) (slotView.getModel().getY()* slotView.getModel().getyScale()*dy),
+                    (int) (slotView.getModel().getWidth()*slotView.getModel().getxScale()*dx), (int) (slotView.getModel().getHeight()* slotView.getModel().getyScale()*dy),null);
         } catch (IOException e) {
             e.printStackTrace();
         }
