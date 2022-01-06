@@ -18,6 +18,14 @@ public class Project extends RuNodeComposite{
         getChildern().add(child);
         notifySubscribers(new dummyTreeNotification(child,"added"));
     }
+    public void addSharedPresentation(Presentation presentation){
+        getChildern().add(presentation);
+        notifySubscribers(null);
+    }
+    public void removeSharedPresentation(Presentation presentation){
+        getChildern().remove(presentation);
+        notifySubscribers(null);
+    }
 
     public boolean containsName(String s){
         for(RuNode p:getChildern()){

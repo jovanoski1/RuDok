@@ -73,8 +73,8 @@ public class ProjectView extends JPanel implements ISubscriber {
                 Presentation presentation = (Presentation)((dummyTreeNotification) notification).getTreeNode();
                 for(int i=0;i<tabs.getTabCount();i++){
                     PresentationView pt = (PresentationView) tabs.getComponentAt(i);
-                    System.out.println(pt.getModel().getIme());
                     if(pt.getModel().equals(presentation)) {tabs.removeTabAt(i);break;}
+                    System.out.println(pt.getModel().getIme());
                 }
                 return;
             }

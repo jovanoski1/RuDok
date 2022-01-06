@@ -14,6 +14,7 @@ public class ActionManager {
     private SelectSlotAction selectSlotAction;
     private UndoAction undoAction;
     private RedoAction redoAction;
+    private SharePresentationAction sharePresentationAction;
 
     public ActionManager(){initialiseActions();}
 
@@ -31,6 +32,15 @@ public class ActionManager {
         selectSlotAction = new SelectSlotAction();
         undoAction = new UndoAction();
         redoAction = new RedoAction();
+        sharePresentationAction = new SharePresentationAction();
+    }
+
+    public SharePresentationAction getSharePresentationAction() {
+        return sharePresentationAction;
+    }
+
+    public void setSharePresentationAction(SharePresentationAction sharePresentationAction) {
+        this.sharePresentationAction = sharePresentationAction;
     }
 
     public RedoAction getRedoAction() {

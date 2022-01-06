@@ -3,10 +3,14 @@ package rudok.model.workspace;
 import rudok.model.tree.RuNode;
 import rudok.model.tree.RuNodeComposite;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Presentation extends RuNodeComposite {
 
     private String autor;
     private String slika;
+    private List<Project> sharedTo = new ArrayList<>();
 
     public Presentation(RuNode parent,String autor,String ime,String slika)
     {
@@ -51,5 +55,13 @@ public class Presentation extends RuNodeComposite {
     @Override
     public String toString() {
         return getIme();
+    }
+
+    public List<Project> getSharedTo() {
+        return sharedTo;
+    }
+
+    public void setSharedTo(List<Project> sharedTo) {
+        this.sharedTo = sharedTo;
     }
 }
