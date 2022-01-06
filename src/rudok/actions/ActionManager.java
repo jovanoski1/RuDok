@@ -15,6 +15,7 @@ public class ActionManager {
     private UndoAction undoAction;
     private RedoAction redoAction;
     private SharePresentationAction sharePresentationAction;
+    private SaveProjectAction saveProjectAction;
 
     public ActionManager(){initialiseActions();}
 
@@ -33,6 +34,15 @@ public class ActionManager {
         undoAction = new UndoAction();
         redoAction = new RedoAction();
         sharePresentationAction = new SharePresentationAction();
+        saveProjectAction = new SaveProjectAction();
+    }
+
+    public SaveProjectAction getSaveProjectAction() {
+        return saveProjectAction;
+    }
+
+    public void setSaveProjectAction(SaveProjectAction saveProjectAction) {
+        this.saveProjectAction = saveProjectAction;
     }
 
     public SharePresentationAction getSharePresentationAction() {

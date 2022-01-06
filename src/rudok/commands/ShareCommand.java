@@ -1,10 +1,13 @@
 package rudok.commands;
 
 import rudok.gui.tree.model.MyTreeNode;
+import rudok.model.tree.RuNode;
 import rudok.model.workspace.Presentation;
 import rudok.model.workspace.Project;
+import rudok.model.workspace.RuNodeType;
 import rudok.view.MainFrame;
 import javax.swing.tree.TreePath;
+import java.util.ArrayList;
 
 public class ShareCommand extends AbstractCommand{
 
@@ -24,7 +27,9 @@ public class ShareCommand extends AbstractCommand{
         node.getNode().setIme(node.getNode().getIme() + " - Shared");
         Presentation presentation = (Presentation) node.getNode();
         Project project = (Project) parent.getNode();
-
+        for(RuNode slide:((Presentation) node.getNode()).getChildern()){
+            node.add(new MyTreeNode(slide, RuNodeType.SLIDE));
+        }
         parent.add(node);
         MainFrame.getInstance().getMyTree().expandPath(new TreePath(node.getPath()));
         project.addSharedPresentation(presentation);
@@ -33,6 +38,7 @@ public class ShareCommand extends AbstractCommand{
 
     @Override
     public void undoCommand() {
+        node.removeAllChildren();
         parent.remove(node);
         node.getNode().setIme(oldName);
         Project project = (Project) parent.getNode();

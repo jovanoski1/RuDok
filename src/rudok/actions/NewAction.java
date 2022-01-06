@@ -29,7 +29,7 @@ public class NewAction extends AbstractRudokAction{
         int ind=RuNodeType.valueOf(String.valueOf(myTreeNode.getType())).ordinal();
         if(myTreeNode.getNode().getParent()==null && (myTreeNode.getParent() instanceof Workspace))return;
         MyTreeNode child = new MyTreeNode(f.getNewRuNode(myTreeNode.getNode()),RuNodeType.values()[ind+1]);
-        myTreeNode.add(child);
+        //myTreeNode.add(child);
         MainFrame.getInstance().getCommandManager().addCommand(new AddCommand(myTreeNode, child));
         MainFrame.getInstance().getMyTree().expandPath(MainFrame.getInstance().getMyTree().getSelectionPath());
         SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getMyTree());
