@@ -13,7 +13,7 @@ public class AddCommand extends AbstractCommand{
 
     private MyTreeNode parent;
     private MyTreeNode node;
-    private List<MyTreeNode> slides = new ArrayList<>();
+    private List<MyTreeNode> slides = new ArrayList<>(); // to add slide to every presentation with same model
 
     public AddCommand(MyTreeNode parent, MyTreeNode node) {
         this.parent = parent;
