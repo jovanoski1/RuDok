@@ -1,5 +1,6 @@
 package rudok;
 
+import rudok.commands.AddCommand;
 import rudok.gui.tree.controller.SlideMouseListener;
 import rudok.gui.tree.model.MyTreeNode;
 import rudok.gui.tree.view.PresentationView;
@@ -15,20 +16,41 @@ import rudok.view.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 public class Utils {
+    private Utils(){}
 
-    public static void openProject(Project project){
+    private static final String lastWorkspacePath = "workspace.txt";
 
-        MyTreeNode projectMTN = new MyTreeNode(project, RuNodeType.PROJECT);
+    public static void openProject(String line){
+        ObjectInputStream os = null;
+        try {
+            os = new ObjectInputStream(new
+                    FileInputStream(line));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        Project p = null;
+        try {
+            //poziv metode readObject() koja vrši dubinsku deserijalizaciju
+            assert os != null;
+            p = (Project) os.readObject();
+        } catch (ClassNotFoundException | IOException ez) {
+            ez.printStackTrace();
+        }
+        if (p==null)return;
+        p.setProjectFile(new File(line));
+        p.setChanged(false);
+        p.addSubscriber(MainFrame.getInstance().getProjectView());
+        MyTreeNode projectMTN = new MyTreeNode(p, RuNodeType.PROJECT);
         MyTreeNode workspaceMTN = (MyTreeNode) MainFrame.getInstance().getMyTree().getModel().getRoot();
         workspaceMTN.add(projectMTN);
+        ((Workspace)workspaceMTN.getNode()).addChild(p);
+        p.setParent((Workspace)workspaceMTN.getNode());
 
-        for(RuNode ruNode:project.getChildern()){
+        //MainFrame.getInstance().getCommandManager().addCommand(new AddCommand(workspaceMTN,projectMTN));
+        for(RuNode ruNode:p.getChildern()){
             Presentation presentation = (Presentation) ruNode;
             MyTreeNode presentationMTN = new MyTreeNode(presentation,RuNodeType.PRESENTATION);
 
@@ -76,6 +98,9 @@ public class Utils {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-        System.out.println("SAVE");
+    }
+
+    public static String getLastWorkspacePath() {
+        return lastWorkspacePath;
     }
 }

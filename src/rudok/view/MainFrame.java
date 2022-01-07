@@ -1,5 +1,6 @@
 package rudok.view;
 
+import rudok.Utils;
 import rudok.actions.ActionManager;
 import rudok.commands.CommandManager;
 import rudok.errors.AError;
@@ -7,12 +8,21 @@ import rudok.gui.tree.model.MyTreeNode;
 import rudok.gui.tree.model.WorkspaceTreeModel;
 import rudok.gui.tree.view.MyTree;
 import rudok.gui.tree.view.ProjectView;
+import rudok.model.tree.RuNode;
+import rudok.model.workspace.Project;
 import rudok.model.workspace.RuNodeType;
 import rudok.model.workspace.Workspace;
 import rudok.observer.ISubscriber;
+import rudok.view.popup.WorkspaceChooserDialog;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 
 public class MainFrame extends JFrame implements ISubscriber {
 
@@ -61,6 +71,36 @@ public class MainFrame extends JFrame implements ISubscriber {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("RuDok app");
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    Writer fileWriter = new FileWriter(Utils.getLastWorkspacePath(), false);
+                    MyTreeNode workspaceMTN = (MyTreeNode) myTree.getModel().getRoot();
+                    Workspace workspace = (Workspace) workspaceMTN.getNode();
+                    for(RuNode ruNode : workspace.getChildern()){
+                        Project project = (Project) ruNode;
+                        System.out.println(project.getIme() + " "+project.getProjectFile());
+                        if(project.getProjectFile()==null || project.isChanged())continue;
+                        Utils.saveProject(project,project.getProjectFile());
+                        fileWriter.append(project.getProjectFile().getPath());
+                        fileWriter.append("\n");
+                    }
+                    fileWriter.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+                System.exit(0);
+            }
+
+            @Override
+            public void windowOpened(WindowEvent e) {
+                new WorkspaceChooserDialog();
+                super.windowOpened(e);
+            }
+        });
 
         menu=new MyMenuBar();
         setJMenuBar(menu);

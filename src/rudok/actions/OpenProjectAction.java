@@ -1,27 +1,13 @@
 package rudok.actions;
 
 import rudok.Utils;
-import rudok.gui.tree.controller.SlideMouseListener;
-import rudok.gui.tree.model.MyTreeNode;
-import rudok.gui.tree.view.PresentationView;
-import rudok.gui.tree.view.SlideView;
-import rudok.gui.tree.view.SlideViewType;
-import rudok.gui.tree.view.SlotView;
-import rudok.model.tree.RuNode;
-import rudok.model.workspace.*;
-import rudok.slotContentHandle.ISlotHandler;
-import rudok.slotContentHandle.ImageSlotHandler;
-import rudok.slotContentHandle.TextSlotHandler;
 import rudok.view.MainFrame;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 
 public class OpenProjectAction extends AbstractRudokAction{
 
@@ -51,7 +37,7 @@ public class OpenProjectAction extends AbstractRudokAction{
         });
         if(jfc.showOpenDialog(MainFrame.getInstance())==JFileChooser.APPROVE_OPTION) {
 
-            ObjectInputStream os = null;
+           /* ObjectInputStream os = null;
             try {
                 os = new ObjectInputStream(new
                         FileInputStream(jfc.getSelectedFile()));
@@ -65,9 +51,9 @@ public class OpenProjectAction extends AbstractRudokAction{
                 p = (Project) os.readObject();
             } catch (ClassNotFoundException | IOException ez) {
                 ez.printStackTrace();
-            }
+            }*/
 
-            Utils.openProject(p);
+            Utils.openProject(jfc.getSelectedFile().getPath());
 
             /*MyTreeNode projectMTN = new MyTreeNode(p, RuNodeType.PROJECT);
             MyTreeNode workspaceMTN = (MyTreeNode) MainFrame.getInstance().getMyTree().getModel().getRoot();
