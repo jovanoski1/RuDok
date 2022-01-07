@@ -1,11 +1,8 @@
 package rudok.actions;
 
-import rudok.errors.ErrorFactory;
 import rudok.gui.tree.model.MyTreeNode;
-import rudok.model.workspace.Presentation;
 import rudok.model.workspace.Project;
 import rudok.view.MainFrame;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.event.ActionEvent;
@@ -26,6 +23,7 @@ public class SaveProjectAction extends AbstractRudokAction{
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser jfc = new JFileChooser();
+        jfc.setAcceptAllFileFilterUsed(false);
         jfc.setFileFilter(new FileFilter() {
             @Override
             public boolean accept(File f) {

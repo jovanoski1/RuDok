@@ -16,6 +16,7 @@ public class ActionManager {
     private RedoAction redoAction;
     private SharePresentationAction sharePresentationAction;
     private SaveProjectAction saveProjectAction;
+    private OpenProjectAction openProjectAction;
 
     public ActionManager(){initialiseActions();}
 
@@ -35,6 +36,15 @@ public class ActionManager {
         redoAction = new RedoAction();
         sharePresentationAction = new SharePresentationAction();
         saveProjectAction = new SaveProjectAction();
+        openProjectAction = new OpenProjectAction();
+    }
+
+    public OpenProjectAction getOpenProjectAction() {
+        return openProjectAction;
+    }
+
+    public void setOpenProjectAction(OpenProjectAction openProjectAction) {
+        this.openProjectAction = openProjectAction;
     }
 
     public SaveProjectAction getSaveProjectAction() {

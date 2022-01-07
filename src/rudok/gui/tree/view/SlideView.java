@@ -72,7 +72,7 @@ public class SlideView extends JPanel implements ISubscriber {
             }
             repaint();
         }
-        gui();
+        //gui();
     }
 
     private void removeSlotView(Slot s){
@@ -82,6 +82,10 @@ public class SlideView extends JPanel implements ISubscriber {
                 break;
             }
         }
+    }
+
+    public void addSlotView(SlotView slotView){
+        slotViewList.add(slotView);
     }
 
     public List<SlotView> getSlotViewList() {

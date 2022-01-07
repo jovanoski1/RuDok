@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 
 public class UndoAction extends AbstractRudokAction{
     public UndoAction(){
-        putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_M,ActionEvent.CTRL_MASK));
+        putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z,ActionEvent.CTRL_MASK));
         putValue(SMALL_ICON,loadIcon("icons/undo.png"));
         putValue(NAME,"Undo");
         putValue(SHORT_DESCRIPTION,"Undo");
