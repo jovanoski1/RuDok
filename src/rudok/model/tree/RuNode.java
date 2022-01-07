@@ -49,6 +49,7 @@ public abstract class RuNode implements IPublisher, Serializable {
         }
         notifyProjectChange();
     }
+    public void notifyProjectChange(){};
 
     public RuNode getParent() {
         return parent;

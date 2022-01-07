@@ -170,7 +170,6 @@ public class Slot implements IPublisher, Serializable {
         if(! (notification instanceof Boolean))notifyProjectChange();
     }
 
-    @Override
     public void notifyProjectChange() {
         parent.notifyProjectChange();
     }

@@ -27,8 +27,4 @@ public class Workspace extends RuNodeComposite {
         return getIme();
     }
 
-    @Override
-    public void notifyProjectChange() {
-
-    }
 }
