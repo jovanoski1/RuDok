@@ -16,8 +16,8 @@ public class OpenProjectAction extends AbstractRudokAction{
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(
                 KeyEvent.VK_X, ActionEvent.CTRL_MASK));
         putValue(SMALL_ICON, loadIcon("icons/open_project.png"));
-        putValue(NAME, "Save project");
-        putValue(SHORT_DESCRIPTION, "Save project");
+        putValue(NAME, "Open project");
+        putValue(SHORT_DESCRIPTION, "Open project");
     }
 
     @Override
