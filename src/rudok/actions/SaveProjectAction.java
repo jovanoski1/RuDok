@@ -1,5 +1,6 @@
 package rudok.actions;
 
+import rudok.Utils;
 import rudok.gui.tree.model.MyTreeNode;
 import rudok.model.workspace.Project;
 import rudok.view.MainFrame;
@@ -60,6 +61,22 @@ public class SaveProjectAction extends AbstractRudokAction{
             }
 
         }
+        Utils.saveProject(project, projectFile);
+        /*File projectFile=(project.getProjectFile());
+
+        if (!project.isChanged()){
+            return;
+        }
+
+        if (project.getProjectFile()==null){
+            if(jfc.showSaveDialog(MainFrame.getInstance())==JFileChooser.APPROVE_OPTION){
+                projectFile=jfc.getSelectedFile();
+
+            }else{
+                return;
+            }
+
+        }
 
         ObjectOutputStream os;
         try {
@@ -70,6 +87,6 @@ public class SaveProjectAction extends AbstractRudokAction{
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-        System.out.println("SAVE");
+        System.out.println("SAVE");*/
     }
 }

@@ -1,5 +1,6 @@
 package rudok.actions;
 
+import rudok.Utils;
 import rudok.gui.tree.controller.SlideMouseListener;
 import rudok.gui.tree.model.MyTreeNode;
 import rudok.gui.tree.view.PresentationView;
@@ -65,7 +66,10 @@ public class OpenProjectAction extends AbstractRudokAction{
             } catch (ClassNotFoundException | IOException ez) {
                 ez.printStackTrace();
             }
-            MyTreeNode projectMTN = new MyTreeNode(p, RuNodeType.PROJECT);
+
+            Utils.openProject(p);
+
+            /*MyTreeNode projectMTN = new MyTreeNode(p, RuNodeType.PROJECT);
             MyTreeNode workspaceMTN = (MyTreeNode) MainFrame.getInstance().getMyTree().getModel().getRoot();
             workspaceMTN.add(projectMTN);
 
@@ -102,7 +106,7 @@ public class OpenProjectAction extends AbstractRudokAction{
                 PresentationView presentationView = new PresentationView(presentation);
                 projectMTN.add(presentationMTN);
             }
-            SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getMyTree());
+            SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getMyTree());*/
         }
     }
 }
