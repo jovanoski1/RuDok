@@ -99,6 +99,15 @@ public class Utils {
             e1.printStackTrace();
         }
     }
+    public static void savePresentation(Presentation presentation,File file){
+        ObjectOutputStream os;
+        try {
+            os = new ObjectOutputStream(new FileOutputStream(file));
+            os.writeObject(presentation);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
 
     public static String getLastWorkspacePath() {
         return lastWorkspacePath;

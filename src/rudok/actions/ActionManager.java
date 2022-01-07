@@ -18,6 +18,7 @@ public class ActionManager {
     private SaveProjectAction saveProjectAction;
     private OpenProjectAction openProjectAction;
     private SaveWorkspaceAction saveWorkspaceAction;
+    private SavePresentationAction savePresentationAction;
 
     public ActionManager(){initialiseActions();}
 
@@ -39,6 +40,15 @@ public class ActionManager {
         saveProjectAction = new SaveProjectAction();
         openProjectAction = new OpenProjectAction();
         saveWorkspaceAction = new SaveWorkspaceAction();
+        savePresentationAction = new SavePresentationAction();
+    }
+
+    public SavePresentationAction getSavePresentationAction() {
+        return savePresentationAction;
+    }
+
+    public void setSavePresentationAction(SavePresentationAction savePresentationAction) {
+        this.savePresentationAction = savePresentationAction;
     }
 
     public SaveWorkspaceAction getSaveWorkspaceAction() {
