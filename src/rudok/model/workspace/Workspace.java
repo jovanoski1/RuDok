@@ -21,4 +21,14 @@ public class Workspace extends RuNodeComposite {
         if(!(child instanceof Project)) return;
         getChildern().remove(child);
     }
+
+    @Override
+    public String toString() {
+        return getIme();
+    }
+
+    @Override
+    public void notifyProjectChange() {
+
+    }
 }

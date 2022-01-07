@@ -70,4 +70,9 @@ public class ErrorFactory implements IPublisher {
             listener.update(notification);
         }
     }
+
+    @Override
+    public void notifyProjectChange() {
+
+    }
 }

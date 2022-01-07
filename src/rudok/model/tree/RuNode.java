@@ -3,13 +3,14 @@ package rudok.model.tree;
 import rudok.observer.IPublisher;
 import rudok.observer.ISubscriber;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class RuNode implements IPublisher {
+public abstract class RuNode implements IPublisher, Serializable {
     private RuNode parent;
     private String ime;
-    private List<ISubscriber> subscribers = new ArrayList<>();
+    private transient List<ISubscriber> subscribers = new ArrayList<>();
 
     public String getIme() {
         return ime;
@@ -46,6 +47,7 @@ public abstract class RuNode implements IPublisher {
         for(ISubscriber listener : getSubscribers()){
             listener.update(notification);
         }
+        notifyProjectChange();
     }
 
     public RuNode getParent() {

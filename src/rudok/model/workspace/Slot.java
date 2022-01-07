@@ -2,27 +2,30 @@ package rudok.model.workspace;
 
 import rudok.observer.IPublisher;
 import rudok.observer.ISubscriber;
+import rudok.serialization.SerializableStrokeAdapter;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Slot implements IPublisher {
+public class Slot implements IPublisher, Serializable {
 
-    private List<ISubscriber> subscribers;
+    private transient List<ISubscriber> subscribers;
     private int x;
     private int y;
     private int width;
     private int height;
     private Color color;
-    private Stroke stroke;
+    private SerializableStrokeAdapter stroke;
     private double xScale;
     private double yScale;
     private boolean isSelected;
     private SlotType type;
     private String content;
+    private Slide parent;
 
-    public Slot(int x, int y, double xScale,double yScale,Color color, SlotType type) {
+    public Slot(int x, int y, double xScale,double yScale,Color color, SlotType type, Slide parent) {
         this.x = x;
         this.y = y;
         this.width=40;
@@ -31,6 +34,7 @@ public class Slot implements IPublisher {
         this.yScale = yScale;
         this.color = color;
         this.type = type;
+        this.parent = parent;
         content = "";
     }
     public void setPosition(int x,int y){
@@ -54,7 +58,7 @@ public class Slot implements IPublisher {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
-        notifySubscribers(null);
+        notifySubscribers(selected);
     }
 
     public SlotType getType() {
@@ -122,11 +126,11 @@ public class Slot implements IPublisher {
     }
 
     public Stroke getStroke() {
-        return stroke;
+        return stroke.getStroke();
     }
 
     public void setStroke(BasicStroke stroke) {
-        this.stroke = stroke;
+        this.stroke = new SerializableStrokeAdapter(stroke);
     }
 
     public List<ISubscriber> getSubscribers() {
@@ -163,5 +167,11 @@ public class Slot implements IPublisher {
         for(ISubscriber listener : getSubscribers()){
             listener.update(notification);
         }
+        if(! (notification instanceof Boolean))notifyProjectChange();
+    }
+
+    @Override
+    public void notifyProjectChange() {
+        parent.notifyProjectChange();
     }
 }

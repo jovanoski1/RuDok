@@ -64,4 +64,12 @@ public class Presentation extends RuNodeComposite {
     public void setSharedTo(List<Project> sharedTo) {
         this.sharedTo = sharedTo;
     }
+
+    @Override
+    public void notifyProjectChange() {
+        ((Project)getParent()).notifyProjectChange();
+        for(Project p : sharedTo){
+            p.notifyProjectChange();
+        }
+    }
 }

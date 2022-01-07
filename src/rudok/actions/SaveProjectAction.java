@@ -45,7 +45,7 @@ public class SaveProjectAction extends AbstractRudokAction{
         if(!(myTreeNode.getNode() instanceof Project)){
             return;
         }
-/*
+
         Project project = (Project) myTreeNode.getNode();
         File projectFile=(project.getProjectFile());
 
@@ -72,7 +72,6 @@ public class SaveProjectAction extends AbstractRudokAction{
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-
-*/
+        System.out.println("SAVE");
     }
 }

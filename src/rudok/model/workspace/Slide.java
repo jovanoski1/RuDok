@@ -28,6 +28,11 @@ public class Slide extends RuNode {
         }
     }
 
+    @Override
+    public String toString() {
+        return getIme();
+    }
+
     public List<Slot> getSlots() {
         return slots;
     }
@@ -38,5 +43,10 @@ public class Slide extends RuNode {
 
     public void setRedniBroj(int redniBroj) {
         this.redniBroj = redniBroj;
+    }
+
+    @Override
+    public void notifyProjectChange() {
+        ((Presentation)getParent()).notifyProjectChange();
     }
 }

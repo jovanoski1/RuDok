@@ -20,7 +20,7 @@ public class MyTreeNode extends DefaultMutableTreeNode {
 
     @Override
     public String toString() {
-        return node.getIme();
+        return node.toString();
     }
 
     @Override
