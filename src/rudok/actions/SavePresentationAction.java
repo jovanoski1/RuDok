@@ -30,12 +30,12 @@ public class SavePresentationAction extends AbstractRudokAction{
             @Override
             public boolean accept(File f) {
                 return (f.isDirectory() ||
-                        f.getName().toLowerCase().endsWith(".gpf"));
+                        f.getName().toLowerCase().endsWith(".gpfp"));
             }
 
             @Override
             public String getDescription() {
-                return "RuDok Presentation Files (*.gpf)";
+                return "RuDok Presentation Files (*.gpfp)";
             }
         });
 
