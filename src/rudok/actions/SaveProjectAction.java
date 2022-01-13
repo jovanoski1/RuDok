@@ -62,31 +62,6 @@ public class SaveProjectAction extends AbstractRudokAction{
 
         }
         Utils.saveProject(project, projectFile);
-        /*File projectFile=(project.getProjectFile());
 
-        if (!project.isChanged()){
-            return;
-        }
-
-        if (project.getProjectFile()==null){
-            if(jfc.showSaveDialog(MainFrame.getInstance())==JFileChooser.APPROVE_OPTION){
-                projectFile=jfc.getSelectedFile();
-
-            }else{
-                return;
-            }
-
-        }
-
-        ObjectOutputStream os;
-        try {
-            os = new ObjectOutputStream(new FileOutputStream(projectFile));
-            os.writeObject(project);
-            project.setProjectFile(projectFile);
-            project.setChanged(false);
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-        System.out.println("SAVE");*/
     }
 }
