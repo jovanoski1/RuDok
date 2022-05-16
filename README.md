@@ -1,3 +1,1 @@
-# rudok-jovanoski1
-rudok-jovanoski1 created by GitHub Classroom
-Mihail Jovanoski 15/20RN
+PowerPoint clone in Java built with patterns (MVC + observer, command pattern, state pattern...)
